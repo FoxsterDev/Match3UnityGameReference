@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
@@ -13,6 +11,7 @@ public class EntryPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
+
+   
 }
