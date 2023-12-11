@@ -12,6 +12,4 @@ public class EntryPoint : MonoBehaviour
     void Update()
     {
     }
-
-   
 }
