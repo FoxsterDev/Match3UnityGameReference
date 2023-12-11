@@ -1,0 +1,1077 @@
+fileFormatVersion: 2
+guid: 9e8500c5381444bab9d5ac3e89997108
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 75
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b52888cbedd41469d661fbd7a875da
+      internalID: 1835127106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_1
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28535f683ffa54ebc9f830af2ce2dfac
+      internalID: -1168567305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_2
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb80f16b054e4509bc75d65693be572
+      internalID: -845234388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_3
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57c54622ebc7b4bcf8b6eda7be25823f
+      internalID: 447620343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_4
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54011190b74ee4e19a4e509625ea0674
+      internalID: -962627059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_5
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51df8bf815dd24b72931e9dfb9deb7bf
+      internalID: -505546575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_6
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 783
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f72b3d43e85aa4fb7ae1255c8068351e
+      internalID: 36183918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_7
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6833c2e8dfea6425399684c953ea1b13
+      internalID: 443841665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_8
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a947a10846a02418891460990a50d4e4
+      internalID: -770261554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_9
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74dbe2a63da3c4238999a2f9724920ff
+      internalID: -1805026601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_10
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de21a8e7c89bd40baa59d674efe92c89
+      internalID: -1862438639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_11
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74a5f762f91849709253a6f911732f8
+      internalID: 690235872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_12
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30de9e7970716417597e45580559a050
+      internalID: -252349215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_13
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 641
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7136752589b1443fea45194500d25d83
+      internalID: -1073284123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_14
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3ee0a5c8e56f443b8f71e269aeb88cc
+      internalID: -940407824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_15
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e1def3a516d7478cb0b37c19d57565d
+      internalID: 20547387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_16
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3d5d1623d56a490bb2e3ee0efeb8c23
+      internalID: -134541087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_17
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc49d3b39ec1947a59974a37d319628e
+      internalID: -953452926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_18
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e998935c10e9426fad43dbd2b2aa843
+      internalID: 647991635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_19
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4260743bcb3464670b491e8dd7e9a345
+      internalID: 276980197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_20
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 499
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849ca422d94d34eb282973ff95e32858
+      internalID: -147989554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_21
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a913720ae99ec4bcea36cf0dd01b38ce
+      internalID: -1165550137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_22
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fe93c8065d9e4632a4b91e2c5489bc9
+      internalID: 612578302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_23
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9d6376f59af4653a0861ad28d2ffcb
+      internalID: 1042720066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_24
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5102e758a144e82b5d67fa44509891
+      internalID: -1102796574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_25
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159ef0f14cb1a402aafbac51fecdbbc9
+      internalID: 783831948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_26
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b69e097096de443e96cc04ba9a46ab9
+      internalID: 1223980452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_27
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 357
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c385b1a98d78c4a57ae632e792b97773
+      internalID: 582983342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_28
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2234588c0d294e0885b80c385f257bc
+      internalID: -1011021349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_29
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c06dcfc618d84695bd75aafb892d7a8
+      internalID: 1116748668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_30
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1985716dcef4f12ae018c61b815091
+      internalID: -1897379427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_31
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25bd1ffd60bf94604b0035323a62795a
+      internalID: -1005431477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_32
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 648e53bb715064ad999c746f32f78e0a
+      internalID: 206037775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_33
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d9ef8d8582a9416a8e518680800a51f
+      internalID: -1985619456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_34
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 215
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2842f2274b9e43818a5e1e829d9f7a4
+      internalID: -1662476238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_35
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ccad32fbd78434cbc6f810b6e6844e
+      internalID: -978180612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_36
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40b1d3e2f7ebd4f82a7ff04300a8bcb5
+      internalID: 857999753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_37
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04755009768784521a67212528f406eb
+      internalID: 1254564240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_38
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2d15fa957b6b46b6b3256754a68f18f
+      internalID: -31304276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_39
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ff04d6d8e30d44a29fff78f46057154
+      internalID: 737005278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_40
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02994fee6067d43fba45a77e9e25d0f2
+      internalID: -784510872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flat 2D Blocks by DALLE_41
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 73
+        width: 115
+        height: 125
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40249b740126a46ed93f87c1c94fa2f4
+      internalID: 719937449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Flat 2D Blocks by DALLE_0: 1835127106
+      Flat 2D Blocks by DALLE_1: -1168567305
+      Flat 2D Blocks by DALLE_10: -1862438639
+      Flat 2D Blocks by DALLE_11: 690235872
+      Flat 2D Blocks by DALLE_12: -252349215
+      Flat 2D Blocks by DALLE_13: -1073284123
+      Flat 2D Blocks by DALLE_14: -940407824
+      Flat 2D Blocks by DALLE_15: 20547387
+      Flat 2D Blocks by DALLE_16: -134541087
+      Flat 2D Blocks by DALLE_17: -953452926
+      Flat 2D Blocks by DALLE_18: 647991635
+      Flat 2D Blocks by DALLE_19: 276980197
+      Flat 2D Blocks by DALLE_2: -845234388
+      Flat 2D Blocks by DALLE_20: -147989554
+      Flat 2D Blocks by DALLE_21: -1165550137
+      Flat 2D Blocks by DALLE_22: 612578302
+      Flat 2D Blocks by DALLE_23: 1042720066
+      Flat 2D Blocks by DALLE_24: -1102796574
+      Flat 2D Blocks by DALLE_25: 783831948
+      Flat 2D Blocks by DALLE_26: 1223980452
+      Flat 2D Blocks by DALLE_27: 582983342
+      Flat 2D Blocks by DALLE_28: -1011021349
+      Flat 2D Blocks by DALLE_29: 1116748668
+      Flat 2D Blocks by DALLE_3: 447620343
+      Flat 2D Blocks by DALLE_30: -1897379427
+      Flat 2D Blocks by DALLE_31: -1005431477
+      Flat 2D Blocks by DALLE_32: 206037775
+      Flat 2D Blocks by DALLE_33: -1985619456
+      Flat 2D Blocks by DALLE_34: -1662476238
+      Flat 2D Blocks by DALLE_35: -978180612
+      Flat 2D Blocks by DALLE_36: 857999753
+      Flat 2D Blocks by DALLE_37: 1254564240
+      Flat 2D Blocks by DALLE_38: -31304276
+      Flat 2D Blocks by DALLE_39: 737005278
+      Flat 2D Blocks by DALLE_4: -962627059
+      Flat 2D Blocks by DALLE_40: -784510872
+      Flat 2D Blocks by DALLE_41: 719937449
+      Flat 2D Blocks by DALLE_5: -505546575
+      Flat 2D Blocks by DALLE_6: 36183918
+      Flat 2D Blocks by DALLE_7: 443841665
+      Flat 2D Blocks by DALLE_8: -770261554
+      Flat 2D Blocks by DALLE_9: -1805026601
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
