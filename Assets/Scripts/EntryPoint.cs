@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class EntryPoint : MonoBehaviour
+namespace Match3.Boostrapper
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EntryPoint : MonoBehaviour
     {
-        print("hello world");
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            print("hello world");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
+        }
     }
 }
