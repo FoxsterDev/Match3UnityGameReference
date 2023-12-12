@@ -64,7 +64,7 @@ namespace Match3.GameCore
 
             if (GUILayout.Button("Generate random preview"))
             {
-                _blocksPreviewObjects = GetRandomBlocksArray((uint)sizePreview);
+                _blocksPreviewObjects = GetRandomBlocksArray((uint) sizePreview);
                 _blocksPreviewImages = _blocksPreviewObjects.Select(AssetPreview.GetAssetPreview).ToList();
             }
 
@@ -94,12 +94,14 @@ namespace Match3.GameCore
                         var prefab = _blocks.GetArrayElementAtIndex(i).FindPropertyRelative("_prefab");
                         prefab.objectReferenceValue = _blocksPreviewObjects[i];
                     }
+
+                    serializedObject.ApplyModifiedProperties();
+                    EditorUtility.SetDirty(serializedObject.targetObject);
                 }
             }
 
             EditorGUILayout.HelpBox("CURRENT STATE!", MessageType.Info);
 
-            serializedObject.ApplyModifiedProperties();
             var width = _width.intValue;
             var height = _height.intValue;
             if (_blocks.arraySize == width * height)
