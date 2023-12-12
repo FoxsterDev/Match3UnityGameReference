@@ -15,15 +15,15 @@ MonoBehaviour:
   _width: 3
   _height: 4
   _blocks:
+  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
+  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
+  - _prefab: {fileID: 1521379226911136206, guid: fe81b9c6cab9b46c68cc26cd76efeedc, type: 3}
+  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
+  - _prefab: {fileID: 1521379226911136206, guid: fe81b9c6cab9b46c68cc26cd76efeedc, type: 3}
   - _prefab: {fileID: 3469589678653263212, guid: 6b590f380bd5840868863d4058bda4dd, type: 3}
+  - _prefab: {fileID: 3469589678653263212, guid: 6b590f380bd5840868863d4058bda4dd, type: 3}
+  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
+  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
+  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
   - _prefab: {fileID: 3469589678653263212, guid: 6b590f380bd5840868863d4058bda4dd, type: 3}
   - _prefab: {fileID: 1521379226911136206, guid: fe81b9c6cab9b46c68cc26cd76efeedc, type: 3}
-  - _prefab: {fileID: 1521379226911136206, guid: fe81b9c6cab9b46c68cc26cd76efeedc, type: 3}
-  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
-  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
-  - _prefab: {fileID: 4179465412506814986, guid: 44e661f6fae804792828a7dbf7f5149b, type: 3}
-  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
-  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
-  - _prefab: {fileID: 7638196735146747904, guid: a432a7c8282984ab3961f36fdf790c2f, type: 3}
-  - _prefab: {fileID: 4796458521820033282, guid: 24c14f57a2a3d42c79d0d0bcc25559bf, type: 3}
-  - _prefab: {fileID: 3469589678653263212, guid: 6b590f380bd5840868863d4058bda4dd, type: 3}
