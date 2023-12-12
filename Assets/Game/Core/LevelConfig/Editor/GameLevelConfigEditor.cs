@@ -18,19 +18,19 @@ namespace Match3.GameCore
         SerializedProperty _blocks;
         List<Texture2D> _blocksPreviewImages = new();
         List<Object> _blocksPreviewObjects = new(10);
-        SerializedProperty _height;
-        SerializedProperty _width;
+        SerializedProperty _rowCount;
+        SerializedProperty _columnCount;
 
-        int _widthPreview, _heightPreview;
+        int _columnCountPreview, _rowCountPreview;
 
         void OnEnable()
         {
-            _height = serializedObject.FindProperty(nameof(_height));
-            _width = serializedObject.FindProperty(nameof(_width));
+            _rowCount = serializedObject.FindProperty(nameof(_rowCount));
+            _columnCount = serializedObject.FindProperty(nameof(_columnCount));
             _blocks = serializedObject.FindProperty(nameof(_blocks));
 
-            _widthPreview = _width.intValue;
-            _heightPreview = _height.intValue;
+            _columnCountPreview = _columnCount.intValue;
+            _rowCountPreview = _rowCount.intValue;
             _blockPrefabs = AssetDatabaseExtension.FindAllPrefabsOfType<Object>("Assets/Game/Prefabs");
         }
 
@@ -58,9 +58,9 @@ namespace Match3.GameCore
 
             EditorGUILayout.HelpBox("PREVIEW", MessageType.Warning);
 
-            _widthPreview = EditorGUILayout.IntSlider("Width preview: ", _widthPreview, 3, 10);
-            _heightPreview = EditorGUILayout.IntSlider("Height preview: ", _heightPreview, 3, 10);
-            var sizePreview = _widthPreview * _heightPreview;
+            _columnCountPreview = EditorGUILayout.IntSlider("Width preview: ", _columnCountPreview, 3, 10);
+            _rowCountPreview = EditorGUILayout.IntSlider("Height preview: ", _rowCountPreview, 3, 10);
+            var sizePreview = _columnCountPreview * _rowCountPreview;
 
             if (GUILayout.Button("Generate random preview"))
             {
@@ -70,12 +70,12 @@ namespace Match3.GameCore
 
             if (_blocksPreviewObjects.Count == sizePreview)
             {
-                for (var row = 0; row < _heightPreview; row++)
+                for (var row = 0; row < _rowCountPreview; row++)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    for (var col = 0; col < _widthPreview; col++)
+                    for (var col = 0; col < _columnCountPreview; col++)
                     {
-                        var index = row * _widthPreview + col;
+                        var index = row * _columnCountPreview + col;
                         GUILayout.Label(_blocksPreviewImages[index], GUILayout.MaxHeight(25), GUILayout.MaxWidth(25));
                     }
 
@@ -84,11 +84,11 @@ namespace Match3.GameCore
 
                 if (GUILayout.Button("Save"))
                 {
-                    _width.intValue = _widthPreview;
-                    _height.intValue = _heightPreview;
+                    _columnCount.intValue = _columnCountPreview;
+                    _rowCount.intValue = _rowCountPreview;
 
                     _blocks.ClearArray();
-                    _blocks.arraySize = _widthPreview * _heightPreview;
+                    _blocks.arraySize = _columnCountPreview * _rowCountPreview;
                     for (var i = 0; i < _blocks.arraySize; i++)
                     {
                         var prefab = _blocks.GetArrayElementAtIndex(i).FindPropertyRelative("_prefab");
@@ -102,16 +102,16 @@ namespace Match3.GameCore
 
             EditorGUILayout.HelpBox("CURRENT STATE!", MessageType.Info);
 
-            var width = _width.intValue;
-            var height = _height.intValue;
-            if (_blocks.arraySize == width * height)
+            var columnCount = _columnCount.intValue;
+            var rowCount = _rowCount.intValue;
+            if (_blocks.arraySize == columnCount * rowCount)
             {
-                for (var row = 0; row < height; row++)
+                for (var row = 0; row < rowCount; row++)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    for (var col = 0; col < width; col++)
+                    for (var col = 0; col < columnCount; col++)
                     {
-                        var index = row * width + col;
+                        var index = row * columnCount + col;
                         var prefab = _blocks.GetArrayElementAtIndex(index).FindPropertyRelative("_prefab");
                         var preview = AssetPreview.GetAssetPreview(prefab.objectReferenceValue);
                         GUILayout.Label(preview, GUILayout.MaxHeight(25), GUILayout.MaxWidth(25));
