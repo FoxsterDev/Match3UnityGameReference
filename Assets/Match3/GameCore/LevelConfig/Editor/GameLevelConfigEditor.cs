@@ -15,16 +15,14 @@ namespace Match3.GameCore
     [CustomEditor(typeof(GameLevelConfig))]
     public sealed class GameLevelConfigEditor : Editor
     {
-        SerializedProperty _rowCount;
-        SerializedProperty _columnCount;
-        SerializedProperty _blocks;
-
-        
         List<Object> _blockPrefabs = new(10);
+        SerializedProperty _blocks;
         List<Texture2D> _blocksPreviewImages = new();
         List<Object> _blocksPreviewObjects = new(10);
-        
+        SerializedProperty _columnCount;
+
         int _columnCountPreview, _rowCountPreview;
+        SerializedProperty _rowCount;
 
         void OnEnable()
         {

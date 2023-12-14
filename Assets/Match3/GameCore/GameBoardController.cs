@@ -3,6 +3,21 @@ using UnityEngine;
 
 namespace Match3.GameCore
 {
+    public interface IAnimationsPlayer
+    {
+        void AnimateMove(BlockEntity current, BlockEntity target);
+    }
+
+    public class GameBoardAnimationsPlayer : IAnimationsPlayer
+    {
+
+        public void AnimateMove(BlockEntity current, BlockEntity target)
+        {
+
+        }
+
+    }
+
     public class GameBoardController : IDisposable
     {
         readonly BlockEntity[,] _board;
@@ -36,27 +51,49 @@ namespace Match3.GameCore
 
         void OnMoveUserInputEvent(BlockEntity block, BlockMoveDirection direction)
         {
-            var isMoveAllowed = IsMoveAllowed(_rowCount, _columnCount, block, direction);
+            var isMoveAllowed = IsMoveAllowed(_rowCount, 
+                                              _columnCount, block, direction, 
+                                              out var rowIndexNew, out var columnIndexNew);
 
             Debug.Log(nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + block+" , "+nameof(isMoveAllowed) +"=>"+isMoveAllowed);
-            if (isMoveAllowed)
+            if (isMoveAllowed) //rowIndexTemp , columnIndexTemp is valid indexes for a block
             {
+                var currentBlock = block; // from  block positions => new column
+                var replacedBlock = _board[rowIndexNew, columnIndexNew];
+
+                //update board model
+                _board[rowIndexNew, columnIndexNew] = currentBlock;
+                _board[currentBlock.RowIndex, currentBlock.ColumnIndex] = replacedBlock;
+                //check pattern
+                
+                //build animations
+                
+                //animate the change 
+                
                 //check pattern: 3 and more in horizontal or vertical
                 //play animation depends on pattern
                 //if success animate shifts
                 //create new elements
             }
-
         }
 
+        
+        
+        bool CheckPattern(BlockEntity[,] _board)
+        {
+            return true;
+        }
+        
         //testable method
         bool IsMoveAllowed(uint rowCount,
                            uint columnCount,
                            BlockEntity block,
-                           BlockMoveDirection direction)
+                           BlockMoveDirection direction, 
+                           out int rowIndexTemp,  
+                           out int columnIndexTemp )
         {
-            var rowIndexTemp = block.RowIndex;
-            var columnIndexTemp = block.ColumnIndex;
+            rowIndexTemp = block.RowIndex;
+            columnIndexTemp = block.ColumnIndex;
 
             switch (direction)
             {

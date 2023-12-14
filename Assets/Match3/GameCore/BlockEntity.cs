@@ -8,6 +8,8 @@ namespace Match3.GameCore
         public IBlockView View { get; }
         public IBlockUserInputEvent UserInput { get;  }
 
+        public uint ID => View.ID;
+
         public BlockEntity(int index,int rowIndex,int columnIndex,IBlockView view, IBlockUserInputEvent userInput)
         {
             Index = index;

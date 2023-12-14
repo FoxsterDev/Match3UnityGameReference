@@ -17,6 +17,7 @@ namespace Match3.GameCore
 
         void Start()
         {
+            
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
