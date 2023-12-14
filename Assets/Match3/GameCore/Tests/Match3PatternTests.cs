@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Match3.GameCore.Tests
 {
-    public class GameCoreMatch3PatternTests
+    public class Match3PatternTests
     {
         // naming test pattern "add_WithNegativeAndPositiveNumbers_ReturnsCorrectSum"
         [Test]

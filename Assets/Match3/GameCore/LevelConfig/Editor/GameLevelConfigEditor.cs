@@ -32,7 +32,7 @@ namespace Match3.GameCore
 
             _columnCountPreview = _columnCount.intValue;
             _rowCountPreview = _rowCount.intValue;
-            _blockPrefabs = AssetDatabaseExtension.FindAllPrefabsOfType<Object>("Assets/Game/Prefabs");
+            _blockPrefabs = AssetDatabaseExtension.FindAllPrefabsOfType<Object>("Assets/Match3/Prefabs");
         }
 
         Object GetRandomBlock()
