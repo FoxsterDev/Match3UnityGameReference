@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Match3.GameCore
 {
@@ -43,17 +44,56 @@ namespace Match3.GameCore
             var columnsCount = board.GetLength(1);
 
             //check in horizontal
-            var id = board[0, 0];
-            var matchCount = 1;
+            //var startId = 0;
+
+            var isMatched = HasMatchesInTheRow(board, rowsCount, columnsCount, out var matches);
+
+            return isMatched;
+        }
+
+         bool HasMatchesInTheRow(uint[,] board,
+                                      int rowsCount,
+                                      int columnsCount, 
+                                      out List<List<(int row, int column)>> matches)
+        {
+            matches = new List<List<(int row, int column)>>(1);
+
             for (var row = 0; row < rowsCount; row++)
             {
-                for (var col = 0; col < columnsCount; col++)
-                {
+                var startId = board[row, 0];
+                var matchCount = 1;
+                var matchList = new List<(int row, int column)>(3);
+                matchList.Add(new(row, 0));
 
+                for (var col = 1; col < columnsCount; col++)
+                {
+                    var id = board[row, col];
+                    if (startId == id)
+                    {
+                        matchCount += 1;
+                        matchList.Add(new(row, col));
+                    }
+                    else
+                    {
+                        if (matchCount >= 3) // in the same row but different id
+                        {
+                            //save it
+                            matches.Add(matchList);
+                        }
+
+                        startId = id;
+                        matchCount = 1;
+                        matchList = new List<(int row, int column)>(3);
+                    }
+                }
+
+                if (matchCount >= 3) //has match
+                {
+                    matches.Add(matchList);
                 }
             }
 
-            return false;
+            return matches.Count > 0;
         }
     }
 }
