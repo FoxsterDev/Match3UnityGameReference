@@ -20,5 +20,15 @@ namespace Match3.GameCore
         /// </summary>
         [SerializeField]
         List<BlockConfig> _blocks = new List<BlockConfig>(16);
+
+        public uint ColumnCount => _columnCount;
+
+        public uint RowCount => _rowCount;
+
+        /// <summary>
+        /// [0,0] is the first, left up
+        /// [0,1] is the second row 
+        /// </summary>
+        public List<BlockConfig> Blocks => _blocks;
     }
 }

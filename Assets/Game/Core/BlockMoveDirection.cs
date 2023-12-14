@@ -1,6 +1,6 @@
 namespace Match3.GameCore
 {
-    public enum BlockDraggingDirection
+    public enum BlockMoveDirection
     {
         NotDetected = -1,
         Left = 0,

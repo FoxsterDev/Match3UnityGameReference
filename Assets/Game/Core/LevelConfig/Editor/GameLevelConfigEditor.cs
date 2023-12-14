@@ -10,17 +10,20 @@ namespace Match3.GameCore
     /// <summary>
     /// Note: It’s strongly recommended to use the UI Toolkit to extend the Unity Editor,
     /// as it provides a more modern, flexible, and scalable solution than IMGUI.
+    /// https://docs.unity3d.com/Manual/UIE-HowTo-CreateCustomInspector.html
     /// </summary>
     [CustomEditor(typeof(GameLevelConfig))]
     public sealed class GameLevelConfigEditor : Editor
     {
-        List<Object> _blockPrefabs = new(10);
-        SerializedProperty _blocks;
-        List<Texture2D> _blocksPreviewImages = new();
-        List<Object> _blocksPreviewObjects = new(10);
         SerializedProperty _rowCount;
         SerializedProperty _columnCount;
+        SerializedProperty _blocks;
 
+        
+        List<Object> _blockPrefabs = new(10);
+        List<Texture2D> _blocksPreviewImages = new();
+        List<Object> _blocksPreviewObjects = new(10);
+        
         int _columnCountPreview, _rowCountPreview;
 
         void OnEnable()
