@@ -33,21 +33,32 @@ namespace Match3.GameCore
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public bool IsMatched(BlockEntity[,] board)
+        public bool IsMatched(BlockEntity[,] board, 
+                              out List<List<(int row, int column)>> matchesInTheRow,
+                              out List<List<(int row, int column)>> matchesInTheColumn)
         {
-            return IsMatched(ConvertBoardToIntMatrix(board));
+            return IsMatched(ConvertBoardToIntMatrix(board), 
+                             out  matchesInTheRow,
+                             out  matchesInTheColumn );
         }
 
         public bool IsMatched(uint[,] board)
         {
+            return IsMatched(
+                board,
+                out var matchesInTheRow,
+                out var matchesInTheColumn);
+        }
+
+        public bool IsMatched(uint[,] board, 
+                              out List<List<(int row, int column)>> matchesInTheRow,
+                              out List<List<(int row, int column)>> matchesInTheColumn )
+        {
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 
-            //check in horizontal
-            //var startId = 0;
-
-            var isMatchedInTheRow = HasMatchesInTheRow(board, rowsCount, columnsCount, out var matchesInTheRow);
-            var isMatchedInTheColumn = HasMatchesInTheColumn(board, rowsCount, columnsCount, out var matchesInTheColumn);
+            var isMatchedInTheRow = HasMatchesInTheRow(board, rowsCount, columnsCount, out  matchesInTheRow);
+            var isMatchedInTheColumn = HasMatchesInTheColumn(board, rowsCount, columnsCount, out  matchesInTheColumn);
 
             return isMatchedInTheRow || isMatchedInTheColumn;
         }
@@ -62,8 +73,7 @@ namespace Match3.GameCore
             {
                 var startId = board[0, col];
                 var matchCount = 1;
-                var matchList = new List<(int row, int column)>(3);
-                matchList.Add(new(0, col));
+                var matchList = new List<(int row, int column)>(3) { (0, col) };
 
                 for (var row = 1; row < rowsCount; row++)
                 {
@@ -83,7 +93,7 @@ namespace Match3.GameCore
 
                         startId = id;
                         matchCount = 1;
-                        matchList = new List<(int row, int column)>(3);
+                        matchList = new List<(int row, int column)>(3) { (row, col) };
                     }
                 }
 
@@ -106,9 +116,8 @@ namespace Match3.GameCore
             {
                 var startId = board[row, 0];
                 var matchCount = 1;
-                var matchList = new List<(int row, int column)>(3);
-                matchList.Add(new(row, 0));
-
+                var matchList = new List<(int row, int column)>(3) { new(row, 0) };
+              
                 for (var col = 1; col < columnsCount; col++)
                 {
                     var id = board[row, col];
@@ -127,7 +136,7 @@ namespace Match3.GameCore
 
                         startId = id;
                         matchCount = 1;
-                        matchList = new List<(int row, int column)>(3);
+                        matchList = new List<(int row, int column)>(3){ new(row, col) };
                     }
                 }
 

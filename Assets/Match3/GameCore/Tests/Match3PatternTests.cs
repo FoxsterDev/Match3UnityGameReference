@@ -202,7 +202,7 @@ namespace Match3.GameCore.Tests
             var isMatched = pattern.IsMatched(board);
 
             //assert
-            Assert.IsTrue(isMatched, "The board has at least one match in the row");
+            Assert.IsTrue(isMatched, "The board has at least one match in the column");
             //add additional asserts
         }
 
@@ -236,7 +236,7 @@ namespace Match3.GameCore.Tests
             Assert.IsTrue(isMatched, "The board has at least one match in the row");
             //add additional asserts
         }
-        
+
         // naming test pattern "add_WithNegativeAndPositiveNumbers_ReturnsCorrectSum"
         [Test]
         public void isMatched_WhenBoardHasAllDifferentBlocks_False()

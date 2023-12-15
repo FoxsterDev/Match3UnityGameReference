@@ -13,17 +13,6 @@ namespace Match3.GameCore
             remove { _onMove -= value; }
         }
 
-        void OnDisable()
-        {
-            if (_onMove != null)//trash
-            {
-                var count = _onMove.GetInvocationList().Length;
-                if (count > 0 && Application.isPlaying)
-                {
-                    Debug.LogWarning(name +" has unsubscribed events ");
-                }
-            }
-        }
 
         public override void OnBeginDrag(PointerEventData eventData)
         {
@@ -59,6 +48,18 @@ namespace Match3.GameCore
             return direction;
         }
 
-      
+        public void Dispose()
+        {
+            if (_onMove != null)//trash
+            {
+                foreach (var del in _onMove.GetInvocationList())
+                {
+                    _onMove -= (Action<BlockMoveDirection>)del;
+                }
+
+                var lentgh = _onMove?.GetInvocationList().Length ?? 0;
+                Debug.Log(name +",InvocationList "+ lentgh);
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Match3.GameCore
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
-            _boardController = new GameBoardController(_levelConfig.RowCount, _levelConfig.ColumnCount);
+            _boardController = new GameBoardController( _levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount);
 
             //var startPosition = v[1];
             for (var row = 0; row < _levelConfig.RowCount; row++)
@@ -43,7 +43,7 @@ namespace Match3.GameCore
                     var userInput = blockInstance.GetComponent<IBlockUserInputEvent>();
                     var blockView = blockInstance.GetComponent<IBlockView>();
 
-                    _boardController.AddBlock(index, row, col, blockView, userInput);
+                    _boardController.AddBlock( row, col, blockView, userInput);
                 }
             }
         }
