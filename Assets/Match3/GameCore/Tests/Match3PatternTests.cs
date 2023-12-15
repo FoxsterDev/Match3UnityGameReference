@@ -130,11 +130,86 @@ namespace Match3.GameCore.Tests
                 { 14, 13, 13, 13, 28 }
             }
         };
+        public static object[] BoardHas3OfTheSameBlocksInTheColumnCases =
+        {
+            new uint[,]
+            {
+                { 1, 2, 3, 4 },
+                { 1, 6, 7, 8 },
+                { 1, 10, 11, 12 },
+                { 13, 14, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 2, 3, 2, 2 },
+                { 1, 6, 7, 8 },
+                { 1, 10, 11, 12 },
+                { 1, 14, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 3, 4 },
+                { 6, 7, 8, 9 },
+                { 6, 10, 11, 12 },
+                { 6, 14, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 3, 4 },
+                { 5, 9, 7, 7 },
+                { 9, 9, 8, 12 },
+                { 13, 9, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 3, 4 },
+                { 5, 6, 10, 7 },
+                { 9, 11, 10, 12 },
+                { 13, 14, 10, 16 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 7 },
+                { 9, 10, 11, 7 },
+                { 3, 1, 3, 7 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 4, 4 },
+                { 5, 6, 4, 7 },
+                { 9, 10, 4, 12 },
+                { 14, 1, 13, 13 }
+            },
+            new uint[,]
+            {
+                { 1, 2, 3, 4, 25 },
+                { 5, 6, 7, 7, 26 },
+                { 9, 10, 11, 7, 27 },
+                { 14, 13, 13, 7, 28 },
+                { 14, 1, 3, 1, 28 }
+            }
+        };
+
+        [Test]
+        [TestCaseSource(nameof(BoardHas3OfTheSameBlocksInTheColumnCases))]
+        public void isMatched_WhenBoardHasFewMatches3OrMoreOfTheSameBlocksInTheColumnMatches_True(uint[,] board)
+        {
+            //arrange
+            var pattern = new Match3AndMoreInHorizontalOrVerticalPattern();
+
+            //act
+            var isMatched = pattern.IsMatched(board);
+
+            //assert
+            Assert.IsTrue(isMatched, "The board has at least one match in the row");
+            //add additional asserts
+        }
 
         //
         [Test]
         [TestCaseSource(nameof(BoardHasFewMatches3OrMoreOfTheSameBlocksInTheRowCases))]
-        public void isMatched_WhenBoardHasFewMatches3OrMoreOfTheSameBlocksInTheMatches_True(uint[,] board)
+        public void isMatched_WhenBoardHasFewMatches3OrMoreOfTheSameBlocksInTheRowMatches_True(uint[,] board)
         {
             //arrange
             var pattern = new Match3AndMoreInHorizontalOrVerticalPattern();
