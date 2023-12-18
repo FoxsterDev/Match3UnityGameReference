@@ -36,10 +36,6 @@ namespace Match3.GameCore
                     var blockInstance = Instantiate(prefab, startPosition, Quaternion.identity, _rectTransform.transform);
                     startPosition.x += 1.27f;
 
-#if UNITY_EDITOR
-                    blockInstance.name = string.Concat("Row:", row, ": Col", col);
-#endif
-
                     var userInput = blockInstance.GetComponent<IBlockUserInputEvent>();
                     var blockView = blockInstance.GetComponent<IBlockView>();
 

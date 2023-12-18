@@ -11,8 +11,8 @@ namespace Match3.GameCore
             
         }
 
-        public void CalculateScoreForTheMatches(List<List<(int row, int column)>> matchesInTheRow,
-                                                List<List<(int row, int column)>> matchesInTheColumn)
+        public void CalculateScoreForTheMatches(List<List<(int row, int column, uint id)>> matchesInTheRow,
+                                                List<List<(int row, int column, uint id)>> matchesInTheColumn)
         {
             foreach (var match in matchesInTheRow)
             {

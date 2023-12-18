@@ -19,7 +19,7 @@ namespace Match3.GameCore
 
     }
 
-    public partial class GameBoardController : IDisposable
+    public  class GameBoardController : IDisposable
     {
         readonly BlockEntity[,] _board;
         readonly uint _columnCount;
@@ -52,7 +52,7 @@ namespace Match3.GameCore
             var block = new BlockEntity(rowIndex, columnIndex, blockView, blockUserInput);
             _board[rowIndex, columnIndex] = block;
 
-            //  cDisplayClass50.block.UserInput.OnMove += new Action<BlockMoveDirection>((object) cDisplayClass50, __methodptr(<AddBlock>b__0));
+            //  cDisplayClass50.currentBlock.UserInput.OnMove += new Action<BlockMoveDirection>((object) cDisplayClass50, __methodptr(<AddBlock>b__0));
             Action<BlockMoveDirection> onMoveCallback = delegate(BlockMoveDirection direction)
             {
                 OnMoveUserInputEvent(block, direction);
@@ -63,15 +63,16 @@ namespace Match3.GameCore
         public void  DestroyBlock(BlockEntity entity)
         {
             //_pool.Release(entity.View);
-            _board[entity.RowIndex, entity.ColumnIndex] = null;
+            entity.Destroy();
+           /* _board[entity.RowIndex, entity.ColumnIndex] = null; //NullBlock with position
             var gameObject = ((MonoBehaviour) entity.View).gameObject;
            // entity.UserInput.OnMove -= onMoveCallback;
            UnityEngine.Object.Destroy(gameObject);
            entity.UserInput.Dispose();
-           entity.View.Dispose();
+           entity.View.Dispose();*/
         }
 
-        public void  AnimateMatch(List<(int row, int column)> match)
+        public void  AnimateMatch(List<(int row, int column, uint id)> match)
         {
             var blocks = new List<BlockEntity>(match.Count);
             foreach (var block in match)
@@ -97,36 +98,59 @@ namespace Match3.GameCore
             //var matrix = new uint[rowsCount, columnsCount];
             for (var col = columnsCount - 1; col >= 0; col--)
             {
+                var startEmptyRow = -1;
                 for (var row = rowsCount - 1; row >= 0; row--)
                 {
-                    //matrix[row, col] = board[row, col].ID;
+                    // = board[row, col].ID;
+                    if (board[row, col].IsEmpty)
+                    {
+                        if (startEmptyRow < 0)
+                        {
+                            startEmptyRow = row;
+                        }
+                    }
+                    else
+                    {
+                        //update board 
+                        var currentBlock = board[row, col];
+                        var emptyBlock = board[startEmptyRow, col];
+                        
+                        _board[startEmptyRow, col] = currentBlock;
+                        _board[row, col] = emptyBlock;
+                        
+                        //update currentBlock entity 
+                        //async animate this
+                        currentBlock.SwapWith(emptyBlock);
+                    }
+                    
                 }
                 
             }
            
         }
 
-        void OnMoveUserInputEvent(BlockEntity block, BlockMoveDirection direction)
+        void OnMoveUserInputEvent(BlockEntity currentBlock, BlockMoveDirection direction)
         {
             var isMoveAllowed = IsMoveAllowed(_rowCount, 
-                                              _columnCount, block, direction, 
+                                              _columnCount, currentBlock, direction, 
                                               out var rowIndexNew, out var columnIndexNew);
 
-            Debug.Log(nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + block+" , "+nameof(isMoveAllowed) +"=>"+isMoveAllowed);
-            if (isMoveAllowed) //rowIndexTemp , columnIndexTemp is valid indexes for a block
+            Debug.Log(nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + currentBlock+" , "+nameof(isMoveAllowed) +"=>"+isMoveAllowed);
+            if (isMoveAllowed) //rowIndexTemp , columnIndexTemp is valid indexes for a currentBlock
             {
-                var currentBlock = block; // from  block positions => new column
+                //var currentBlock = currentBlock; // from  currentBlock positions => new column
                 var targetBlock = _board[rowIndexNew, columnIndexNew];
-
                 //update board 
                 _board[rowIndexNew, columnIndexNew] = currentBlock;
                 _board[currentBlock.RowIndex, currentBlock.ColumnIndex] = targetBlock;
-                //update block entity 
+                //update currentBlock entity 
                 //async animate this
                 currentBlock.SwapWith(targetBlock);
 
-
-                var isPatternFound = _matchPattern.IsMatched(_board, out var matchesInTheRow, out var matchesInTheColumn);
+                var isPatternFound = _matchPattern.IsMatched(_board, 
+                                                             out var matchesInTheRow, 
+                                                             out var matchesInTheColumn, 
+                                                             BlockEntity.EMPTY_ID);
                 if (isPatternFound)
                 {
                    _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
@@ -139,7 +163,10 @@ namespace Match3.GameCore
                    {
                        AnimateMatch(match); //async animation
                    }
-                   //shift block in the board: compacting
+
+                   //shift currentBlock in the board: compacting
+                   //Compacting(_board);
+                  
                    
                    //create new blocks
                 }

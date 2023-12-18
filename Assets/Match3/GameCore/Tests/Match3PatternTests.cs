@@ -4,6 +4,72 @@ namespace Match3.GameCore.Tests
 {
     public class Match3PatternTests
     {
+        public static object[] BoardHasOnlyEmptyBlockMatchesCases =
+        {
+            new uint[,]
+            {
+                { 1, 0, 0, 0 },
+                { 1, 2, 3, 0 },
+                { 9, 10, 0, 0 },
+                { 13, 14, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 2, 1, 1, 2, 25 },
+                { 0, 2, 3, 4, 5 },
+                { 0, 10, 11, 12, 13 },
+                { 0, 14, 0, 0, 0 }
+            }
+            ,
+            new uint[,]
+            {
+                { 0, 0, 0 },
+                { 0, 1, 1 },
+                { 1, 2, 1 },
+            }
+            ,
+            new uint[,]
+            {
+                { 2, 1, 2, 3, 25 },
+                { 5, 0, 0, 0, 6 },
+                { 10, 11, 0, 0, 0 },
+                { 13, 14, 0, 16, 16 }
+            }
+        };
+        
+        public static object[] BoardHasFewMatches3OrMoreOfTheSameBlocksWithEmptyBlocksInTheRowCases =
+        {
+            new uint[,]
+            {
+                { 1, 1, 1, 1 },
+                { 1, 1, 1, 1 },
+                { 9, 10, 0, 0 },
+                { 13, 14, 15, 16 }
+            },
+            new uint[,]
+            {
+                { 2, 1, 1, 2, 25 },
+                { 3, 6, 6, 6, 6 },
+                { 9, 10, 11, 12, 13 },
+                { 13, 14, 0, 0, 0 }
+            }
+            ,
+            new uint[,]
+            {
+                { 0, 0, 0 },
+                { 0, 1, 1 },
+                { 1, 1, 1 },
+            }
+            ,
+            new uint[,]
+            {
+                { 2, 1, 1, 1, 25 },
+                { 5, 6, 6, 6, 6 },
+                { 10, 11, 0, 0, 0 },
+                { 13, 14, 16, 16, 16 }
+            }
+        };
+        
         public static object[] BoardHasFewMatches3OrMoreOfTheSameBlocksInTheRowCases =
         {
             new uint[,]
@@ -190,6 +256,37 @@ namespace Match3.GameCore.Tests
                 { 14, 1, 3, 1, 28 }
             }
         };
+        
+        //
+        [Test]
+        [TestCaseSource(nameof(BoardHasOnlyEmptyBlockMatchesCases))]
+        public void isMatched_WhenBoardHasOnlyEmptyBlockMatchesCases_False(uint[,] board)
+        {
+            //arrange
+            var pattern = new Match3AndMoreInHorizontalOrVerticalPattern();
+
+            //act
+            var isMatched = pattern.IsMatched(board);
+
+            //assert
+            Assert.IsFalse(isMatched, "The board has only empty blocks");
+            //add additional asserts
+        }
+
+        [Test]
+        [TestCaseSource(nameof(BoardHasFewMatches3OrMoreOfTheSameBlocksWithEmptyBlocksInTheRowCases))]
+        public void isMatched_WhenBoardHasFewMatches3OrMoreOfTheSameBlocksWithEmptyBlocksInTheRow_True(uint[,] board)
+        {
+            //arrange
+            var pattern = new Match3AndMoreInHorizontalOrVerticalPattern();
+
+            //act
+            var isMatched = pattern.IsMatched(board);
+
+            //assert
+            Assert.IsTrue(isMatched, "The board has at least one match in the row");
+            //add additional asserts
+        }
 
         [Test]
         [TestCaseSource(nameof(BoardHas3OfTheSameBlocksInTheColumnCases))]
