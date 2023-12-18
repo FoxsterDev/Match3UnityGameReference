@@ -177,7 +177,10 @@ namespace Match3.GameCore
                 else
                 {
                     Debug.Log("No pattern found");
-                    //swap back blocks
+                    //animate compacting
+                    _compacting.Compact(_board, out var shifts);
+                    AnimateCompacting(shifts);
+                    //swap back blocks as candy crash
                 }
                 //check pattern
 
