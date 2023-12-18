@@ -1,6 +1,6 @@
 namespace Match3.GameCore
 {
-    public static class BlockEntityExtension
+    public static class GameBoardExtension
     {
         /// <summary>
         /// it is better for testing resons
@@ -24,17 +24,17 @@ namespace Match3.GameCore
             return matrix;
         }
 
-        public static string ConvertToString(this uint[,] sourceBoard)
+        public static string ConvertToString(this uint[,] board)
         {
             string output = "";
-            var rowsCount = sourceBoard.GetLength(0);
-            var columnsCount = sourceBoard.GetLength(1);
+            var rowsCount = board.GetLength(0);
+            var columnsCount = board.GetLength(1);
 
             for (var row = 0; row < rowsCount; row++)
             {
                 for (var col = 0; col < columnsCount; col++)
                 {
-                    output += sourceBoard[row, col] + ",";
+                    output += board[row, col] + ",";
                 }
 
                 output += "\n";
