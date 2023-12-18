@@ -6,7 +6,7 @@ namespace Match3.GameCore.Tests
 {
     public class GameBoardCompactingTests
     {
-        public static IEnumerable<TestDataWrapper<uint[,], uint[,]>> BoardHasOnlyOneCompactingTestCases()
+        public static IEnumerable<TestDataWrapper<uint[,], uint[,]>> BoardHasCompactingInOnlyOneColumnTestCases()
         {
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
@@ -279,6 +279,91 @@ namespace Match3.GameCore.Tests
                     { 13, 14, 15, 2 }
                 }
             };
+            yield return new TestDataWrapper<uint[,], uint[,]>
+            {
+                Value =  new uint[,]
+                {
+                    { 1, 2, 3, 4 },
+                    { 1, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 0, 14, 15, 6 }
+                },
+                Expected = new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 1, 10, 1, 5 },
+                    { 1, 14, 15, 6 }
+                }
+            };
+            yield return new TestDataWrapper<uint[,], uint[,]>
+            {
+                Value =  new uint[,]
+                {
+                    { 1, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 0, 14, 15, 6 }
+                },
+                Expected = new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 1, 14, 15, 6 }
+                }
+            };
+            yield return new TestDataWrapper<uint[,], uint[,]>
+            {
+                Value =  new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 1, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 0, 14, 15, 6 }
+                },
+                Expected = new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 1, 14, 15, 6 }
+                }
+            };
+            yield return new TestDataWrapper<uint[,], uint[,]>
+            {
+                Value =  new uint[,]
+                {
+                    { 2, 2, 3, 4 },
+                    { 1, 2, 3, 2 },
+                    { 0, 10, 1, 5 },
+                    { 0, 14, 15, 6 }
+                },
+                Expected = new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 2, 10, 1, 5 },
+                    { 1, 14, 15, 6 }
+                }
+            };
+            yield return new TestDataWrapper<uint[,], uint[,]>
+            {
+                Value =  new uint[,]
+                {
+                    { 1, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 2, 10, 1, 5 },
+                    { 0, 14, 15, 6 }
+                },
+                Expected = new uint[,]
+                {
+                    { 0, 2, 3, 4 },
+                    { 0, 2, 3, 2 },
+                    { 1, 10, 1, 5 },
+                    { 2, 14, 15, 6 }
+                }
+            };
         }
 
         public static IEnumerable<TestDataWrapper<uint[,], uint[,]>> BoardHasFewCompactingTestCases()
@@ -395,6 +480,23 @@ namespace Match3.GameCore.Tests
                     ( 0, 3, 2, 3 )
                 }
             };
+            yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 2, 3, 4 },
+                    { 1, 2, 2, 3 },
+                    { 9, 0, 5, 0 },
+                    { 13, 14, 15, 0 }
+                },
+                Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
+                {
+                    ( 1, 3, 3, 3 ),
+                    ( 0, 3, 2, 3 ),
+                    ( 1, 1, 2, 1 ),
+                    ( 0, 1, 1, 1 )
+                }
+            };
         }
 
         public class TestDataWrapper<T, TExp>
@@ -442,18 +544,18 @@ namespace Match3.GameCore.Tests
         public void isCompacted_WhenBoardHasFewCompacting_True(TestDataWrapper<uint[,], uint[,]> td)
         {
             //arrange
-            var compacting = new GameBoardCompacting();
+            ICompacting compacting = new GameBoardCompacting();
             //act
             compacting.Compact(td.Value, out var shifts, out var outBoard);
             //assert
             Assert.IsTrue(outBoard.IsEqualBoardTo(td.Expected), $"After compacting expected board does not equal to out board\n{outBoard.ConvertToString()}");
         }
 
-        [TestCaseSource(nameof(BoardHasOnlyOneCompactingTestCases))]
-        public void isCompacted_WhenBoardHasOnlyOneCompacting_True(TestDataWrapper<uint[,], uint[,]> td)
+        [TestCaseSource(nameof(BoardHasCompactingInOnlyOneColumnTestCases))]
+        public void isCompacted_WhenBoardHasCompactingInOnlyOneColumn_True(TestDataWrapper<uint[,], uint[,]> td)
         {
             //arrange
-            var compacting = new GameBoardCompacting();
+            ICompacting compacting = new GameBoardCompacting();
             //act
             compacting.Compact(td.Value, out var shifts, out var outBoard);
             //assert

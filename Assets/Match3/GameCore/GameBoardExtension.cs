@@ -42,6 +42,7 @@ namespace Match3.GameCore
 
             return output;
         }
+
         public static bool IsEqualBoardTo(this uint[,] sourceBoard, uint[,] targetBoard)
         {
             var rowsCount = sourceBoard.GetLength(0);

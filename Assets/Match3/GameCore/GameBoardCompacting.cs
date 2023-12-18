@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 
 namespace Match3.GameCore
 {
     public class GameBoardCompacting : ICompacting
     {
-        public void Compact(uint[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> acts, out uint[,] outBoard)
+        public void Compact(uint[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts, out uint[,] outBoard)
         {
-            acts = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>(1);
+            shifts = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>(1);
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 
@@ -31,7 +30,7 @@ namespace Match3.GameCore
                         board[startEmptyRow, col] = currentBlock;
                         board[row, col] = emptyBlock;
 
-                        acts.Add((row, col, startEmptyRow, col));
+                        shifts.Add((row, col, startEmptyRow, col));
 
                         row = startEmptyRow;
                         startEmptyRow = -1;
@@ -42,9 +41,9 @@ namespace Match3.GameCore
             outBoard = board;
         }
 
-        public void Compact(BlockEntity[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> acts)
+        public void Compact(BlockEntity[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts)
         {
-            Compact(board.ConvertBoardToIntMatrix(), out acts, out var outBoard);
+            Compact(board.ConvertBoardToIntMatrix(), out shifts, out var outBoard);
         }
     }
 }
