@@ -20,8 +20,8 @@ namespace Match3.GameCore
     {
         readonly BlockEntity[,] _board;
         readonly uint _columnCount;
+        readonly ICompacting _compacting;
         readonly IMatchPattern _matchPattern;
-
         readonly uint _rowCount;
 
         //rethink
@@ -39,6 +39,7 @@ namespace Match3.GameCore
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new Match3AndMoreInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
+            _compacting = new GameBoardCompacting();
         }
 
         public void Dispose()
@@ -54,21 +55,36 @@ namespace Match3.GameCore
             var block = new BlockEntity(rowIndex, columnIndex, blockView, blockUserInput);
             _board[rowIndex, columnIndex] = block;
 
-            //  cDisplayClass50.currentBlock.UserInput.OnMove += new Action<BlockMoveDirection>((object) cDisplayClass50, __methodptr(<AddBlock>b__0));
-            Action<BlockMoveDirection> onMoveCallback = delegate(BlockMoveDirection direction) { OnMoveUserInputEvent(block, direction); };
-            block.UserInput.OnMove += onMoveCallback;
+            //cDisplayClass50.currentBlock.UserInput.OnMove += new Action<BlockMoveDirection>((object) cDisplayClass50, __methodptr(<AddBlock>b__0));
+            //https://www.c-sharpcorner.com/article/c-sharp-local-function-vs-delegates/
+            void MoveCallback(BlockMoveDirection direction)
+            {
+                OnMoveUserInputEvent(block, direction);
+            }
+
+            block.UserInput.OnMove += MoveCallback;
         }
 
-        public void DestroyBlock(BlockEntity entity)
+        void DestroyBlock(BlockEntity entity)
         {
             //_pool.Release(entity.View);
+            //entity.UserInput.OnMove -= onMoveCallback;
             entity.Destroy();
-            /* _board[entity.RowIndex, entity.ColumnIndex] = null; //NullBlock with position
-             var gameObject = ((MonoBehaviour) entity.View).gameObject;
-            // entity.UserInput.OnMove -= onMoveCallback;
-            UnityEngine.Object.Destroy(gameObject);
-            entity.UserInput.Dispose();
-            entity.View.Dispose();*/
+        }
+
+        public void AnimateCompacting(List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts)
+        {
+            //  //async animate this
+            foreach (var shift in shifts)
+            {
+                var currentBlock = _board[shift.startRow, shift.startColumn];
+                var emptyBlock = _board[shift.targetRow, shift.targetColumn];
+
+                _board[shift.targetRow, shift.targetColumn] = currentBlock;
+                _board[shift.startRow, shift.startColumn] = emptyBlock;
+
+                currentBlock.SwapWith(emptyBlock);
+            }
         }
 
         public void AnimateMatch(List<(int row, int column, uint id)> match)
@@ -85,19 +101,17 @@ namespace Match3.GameCore
                 DestroyBlock(block);
             }
         }
-
+/*
         void Compacting(BlockEntity[,] board)
         {
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 
-            //var matrix = new uint[rowsCount, columnsCount];
             for (var col = columnsCount - 1; col >= 0; col--)
             {
                 var startEmptyRow = -1;
                 for (var row = rowsCount - 1; row >= 0; row--)
                 {
-                    // = board[row, col].ID;
                     if (board[row, col].IsEmpty)
                     {
                         if (startEmptyRow < 0)
@@ -105,16 +119,14 @@ namespace Match3.GameCore
                             startEmptyRow = row;
                         }
                     }
-                    else if(startEmptyRow > -1)
+                    else if (startEmptyRow > -1)
                     {
-                        //update board 
                         var currentBlock = board[row, col];
                         var emptyBlock = board[startEmptyRow, col];
 
                         _board[startEmptyRow, col] = currentBlock;
                         _board[row, col] = emptyBlock;
 
-                        //update currentBlock entity 
                         //async animate this
                         currentBlock.SwapWith(emptyBlock);
 
@@ -123,7 +135,7 @@ namespace Match3.GameCore
                 }
             }
         }
-
+*/
         void OnMoveUserInputEvent(BlockEntity currentBlock, BlockMoveDirection direction)
         {
             var isMoveAllowed = IsMoveAllowed(
@@ -133,38 +145,32 @@ namespace Match3.GameCore
 
             Debug.Log(
                 nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + currentBlock + " , " + nameof(isMoveAllowed) + "=>" + isMoveAllowed);
-            if (isMoveAllowed) //rowIndexTemp , columnIndexTemp is valid indexes for a currentBlock
+            if (isMoveAllowed)
             {
-                //var currentBlock = currentBlock; // from  currentBlock positions => new column
                 var targetBlock = _board[rowIndexNew, columnIndexNew];
                 //update board 
                 _board[rowIndexNew, columnIndexNew] = currentBlock;
                 _board[currentBlock.RowIndex, currentBlock.ColumnIndex] = targetBlock;
-                //update currentBlock entity 
+
                 //async animate this
                 currentBlock.SwapWith(targetBlock);
 
-                var isPatternFound = _matchPattern.IsMatched(
+                var hasMatch = _matchPattern.IsMatched(
                     _board,
                     out var matchesInTheRow,
                     out var matchesInTheColumn,
                     BlockEntity.EMPTY_ID);
-                if (isPatternFound)
+
+                if (hasMatch)
                 {
+                    //animate matches
+                    AnimateMatches(matchesInTheRow, matchesInTheColumn);
+                    //calculate score
                     _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
-                    //async animate it 
-                    foreach (var match in matchesInTheRow)
-                    {
-                        AnimateMatch(match); //async animation
-                    }
 
-                    foreach (var match in matchesInTheColumn)
-                    {
-                        AnimateMatch(match); //async animation
-                    }
-
-                    //shift currentBlock in the board: compacting
-                    Compacting(_board);
+                    //animate compacting
+                    _compacting.Compact(_board, out var shifts);
+                    AnimateCompacting(shifts);
 
                     //create new blocks
                 }
@@ -183,6 +189,19 @@ namespace Match3.GameCore
                 //play animation depends on pattern
                 //if success animate shifts
                 //create new elements
+            }
+        }
+
+        void AnimateMatches(List<List<(int row, int column, uint id)>> matchesInTheRow, List<List<(int row, int column, uint id)>> matchesInTheColumn)
+        {
+            foreach (var match in matchesInTheRow)
+            {
+                AnimateMatch(match); //async animation
+            }
+
+            foreach (var match in matchesInTheColumn)
+            {
+                AnimateMatch(match); //async animation
             }
         }
 

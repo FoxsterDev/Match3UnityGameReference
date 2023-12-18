@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,27 +5,6 @@ namespace Match3.GameCore
 {
     public class Match3AndMoreInHorizontalOrVerticalPattern : IMatchPattern
     {
-        /// <summary>
-        /// it is better for testing resons
-        /// </summary>
-        /// <param name="board"></param>
-        /// <returns>converted matrix with block id</returns>
-        uint[,] ConvertBoardToIntMatrix(BlockEntity[,] board)
-        {
-            var rowsCount = board.GetLength(0);
-            var columnsCount = board.GetLength(1);
-
-            var matrix = new uint[rowsCount, columnsCount];
-            for (var row = 0; row < rowsCount; row++)
-            {
-                for (var col = 0; col < columnsCount; col++)
-                {
-                    matrix[row, col] = board[row, col].ID;
-                }
-            }
-
-            return matrix;
-        }
         /// <summary>
         ///  0, 1, 0, 2
         ///  0, 0, 2, 3
@@ -39,7 +17,7 @@ namespace Match3.GameCore
                               out List<List<(int row, int column, uint id)>> matchesInTheColumn, 
                               params uint[] skipID)
         {
-            return IsMatched(ConvertBoardToIntMatrix(board), 
+            return IsMatched(board.ConvertBoardToIntMatrix(), 
                              out  matchesInTheRow,
                              out  matchesInTheColumn, skipID );
         }
@@ -133,7 +111,7 @@ namespace Match3.GameCore
                 var startId = board[row, 0];
                 var matchCount = 1;
                 var matchList = new List<(int row, int column, uint id)>(3) { new(row, 0, startId) };
-              
+
                 for (var col = 1; col < columnsCount; col++)
                 {
                     var id = board[row, col];
