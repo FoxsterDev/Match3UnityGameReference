@@ -11,24 +11,27 @@ namespace Match3.GameCore
 
     public class GameBoardAnimationsPlayer : IAnimationsPlayer
     {
-
         public void AnimateMove(BlockEntity current, BlockEntity target)
         {
-
         }
-
     }
 
-    public  class GameBoardController : IDisposable
+    public class GameBoardController : IDisposable
     {
         readonly BlockEntity[,] _board;
         readonly uint _columnCount;
-        readonly uint _rowCount;
         readonly IMatchPattern _matchPattern;
+
+        readonly uint _rowCount;
+
         //rethink
         readonly ScoreController _scoreController;
-        
-        public GameBoardController(GameLevelConfig levelConfig, uint rowCount, uint columnCount)
+
+        Pool<IBlockView, int> _pool = new();
+
+        public GameBoardController(GameLevelConfig levelConfig,
+                                   uint rowCount,
+                                   uint columnCount)
         {
             _rowCount = rowCount;
             _columnCount = columnCount;
@@ -36,7 +39,6 @@ namespace Match3.GameCore
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new Match3AndMoreInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
-
         }
 
         public void Dispose()
@@ -44,35 +46,32 @@ namespace Match3.GameCore
         }
 
         public void AddBlock(
-                             int rowIndex,
-                             int columnIndex,
-                             IBlockView blockView,
-                             IBlockUserInputEvent blockUserInput)
+            int rowIndex,
+            int columnIndex,
+            IBlockView blockView,
+            IBlockUserInputEvent blockUserInput)
         {
             var block = new BlockEntity(rowIndex, columnIndex, blockView, blockUserInput);
             _board[rowIndex, columnIndex] = block;
 
             //  cDisplayClass50.currentBlock.UserInput.OnMove += new Action<BlockMoveDirection>((object) cDisplayClass50, __methodptr(<AddBlock>b__0));
-            Action<BlockMoveDirection> onMoveCallback = delegate(BlockMoveDirection direction)
-            {
-                OnMoveUserInputEvent(block, direction);
-            };
+            Action<BlockMoveDirection> onMoveCallback = delegate(BlockMoveDirection direction) { OnMoveUserInputEvent(block, direction); };
             block.UserInput.OnMove += onMoveCallback;
         }
 
-        public void  DestroyBlock(BlockEntity entity)
+        public void DestroyBlock(BlockEntity entity)
         {
             //_pool.Release(entity.View);
             entity.Destroy();
-           /* _board[entity.RowIndex, entity.ColumnIndex] = null; //NullBlock with position
-            var gameObject = ((MonoBehaviour) entity.View).gameObject;
-           // entity.UserInput.OnMove -= onMoveCallback;
-           UnityEngine.Object.Destroy(gameObject);
-           entity.UserInput.Dispose();
-           entity.View.Dispose();*/
+            /* _board[entity.RowIndex, entity.ColumnIndex] = null; //NullBlock with position
+             var gameObject = ((MonoBehaviour) entity.View).gameObject;
+            // entity.UserInput.OnMove -= onMoveCallback;
+            UnityEngine.Object.Destroy(gameObject);
+            entity.UserInput.Dispose();
+            entity.View.Dispose();*/
         }
 
-        public void  AnimateMatch(List<(int row, int column, uint id)> match)
+        public void AnimateMatch(List<(int row, int column, uint id)> match)
         {
             var blocks = new List<BlockEntity>(match.Count);
             foreach (var block in match)
@@ -86,9 +85,6 @@ namespace Match3.GameCore
                 DestroyBlock(block);
             }
         }
-
-        Pool<IBlockView, int> _pool = new Pool<IBlockView, int>();
-
 
         void Compacting(BlockEntity[,] board)
         {
@@ -109,33 +105,34 @@ namespace Match3.GameCore
                             startEmptyRow = row;
                         }
                     }
-                    else
+                    else if(startEmptyRow > -1)
                     {
                         //update board 
                         var currentBlock = board[row, col];
                         var emptyBlock = board[startEmptyRow, col];
-                        
+
                         _board[startEmptyRow, col] = currentBlock;
                         _board[row, col] = emptyBlock;
-                        
+
                         //update currentBlock entity 
                         //async animate this
                         currentBlock.SwapWith(emptyBlock);
+
+                        startEmptyRow = row;
                     }
-                    
                 }
-                
             }
-           
         }
 
         void OnMoveUserInputEvent(BlockEntity currentBlock, BlockMoveDirection direction)
         {
-            var isMoveAllowed = IsMoveAllowed(_rowCount, 
-                                              _columnCount, currentBlock, direction, 
-                                              out var rowIndexNew, out var columnIndexNew);
+            var isMoveAllowed = IsMoveAllowed(
+                _rowCount,
+                _columnCount, currentBlock, direction,
+                out var rowIndexNew, out var columnIndexNew);
 
-            Debug.Log(nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + currentBlock+" , "+nameof(isMoveAllowed) +"=>"+isMoveAllowed);
+            Debug.Log(
+                nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + currentBlock + " , " + nameof(isMoveAllowed) + "=>" + isMoveAllowed);
             if (isMoveAllowed) //rowIndexTemp , columnIndexTemp is valid indexes for a currentBlock
             {
                 //var currentBlock = currentBlock; // from  currentBlock positions => new column
@@ -147,28 +144,29 @@ namespace Match3.GameCore
                 //async animate this
                 currentBlock.SwapWith(targetBlock);
 
-                var isPatternFound = _matchPattern.IsMatched(_board, 
-                                                             out var matchesInTheRow, 
-                                                             out var matchesInTheColumn, 
-                                                             BlockEntity.EMPTY_ID);
+                var isPatternFound = _matchPattern.IsMatched(
+                    _board,
+                    out var matchesInTheRow,
+                    out var matchesInTheColumn,
+                    BlockEntity.EMPTY_ID);
                 if (isPatternFound)
                 {
-                   _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
-                   //async animate it 
-                   foreach (var match in matchesInTheRow)
-                   {
-                       AnimateMatch(match); //async animation
-                   }
-                   foreach (var match in matchesInTheColumn)
-                   {
-                       AnimateMatch(match); //async animation
-                   }
+                    _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
+                    //async animate it 
+                    foreach (var match in matchesInTheRow)
+                    {
+                        AnimateMatch(match); //async animation
+                    }
 
-                   //shift currentBlock in the board: compacting
-                   //Compacting(_board);
-                  
-                   
-                   //create new blocks
+                    foreach (var match in matchesInTheColumn)
+                    {
+                        AnimateMatch(match); //async animation
+                    }
+
+                    //shift currentBlock in the board: compacting
+                    Compacting(_board);
+
+                    //create new blocks
                 }
                 else
                 {
@@ -188,15 +186,14 @@ namespace Match3.GameCore
             }
         }
 
-       
         //testable method
         bool IsMoveAllowed(uint rowCount,
                            uint columnCount,
                            BlockEntity block,
-                           BlockMoveDirection direction, 
-                           out int rowIndexTemp,  
-                           out int columnIndexTemp )
-        { 
+                           BlockMoveDirection direction,
+                           out int rowIndexTemp,
+                           out int columnIndexTemp)
+        {
             rowIndexTemp = block.RowIndex;
             columnIndexTemp = block.ColumnIndex;
 
