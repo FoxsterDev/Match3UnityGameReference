@@ -21,6 +21,14 @@ namespace Match3.GameCore
         [SerializeField]
         List<BlockConfig> _blocks = new List<BlockConfig>(16);
 
+        [SerializeField]
+        [Range(1, 4)]
+        uint _minBlockId = 1;
+        [SerializeField]
+        [Range(2, 5)]
+        uint _maxBlockId = 5;
+
+        
         public uint ColumnCount => _columnCount;
 
         public uint RowCount => _rowCount;
@@ -30,5 +38,9 @@ namespace Match3.GameCore
         /// [0,1] is the second row 
         /// </summary>
         public List<BlockConfig> Blocks => _blocks;
+
+        public uint MinBlockId => _minBlockId;
+
+        public uint MaxBlockId => _maxBlockId;
     }
 }

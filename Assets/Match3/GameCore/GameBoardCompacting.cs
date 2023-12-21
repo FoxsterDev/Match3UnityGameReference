@@ -15,7 +15,7 @@ namespace Match3.GameCore
                 var startEmptyRow = -1;
                 for (var row = rowsCount - 1; row >= 0; row--)
                 {
-                    if (board[row, col] == 0)
+                    if (board[row, col] == BlockEntity.EMPTY_ID)
                     {
                         if (startEmptyRow < 0)
                         {

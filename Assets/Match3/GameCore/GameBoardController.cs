@@ -41,7 +41,7 @@ namespace Match3.GameCore
             _matchPattern = new Match3AndMoreInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
             _compacting = new GameBoardCompacting();
-            _blocksGenerator = new GameBoardBlocksGenerator();
+            _blocksGenerator = new GameBoardBlocksGenerator(levelConfig);
         }
 
         public void Dispose()
@@ -142,6 +142,7 @@ namespace Match3.GameCore
                     AnimateCompacting(shifts); //modify board
 
                     //create new blocks
+                    _blocksGenerator.Generate(_board, out var newBlocks);
                 }
                 else
                 {
