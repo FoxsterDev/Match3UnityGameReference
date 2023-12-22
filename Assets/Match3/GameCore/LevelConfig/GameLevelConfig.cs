@@ -47,5 +47,10 @@ namespace Match3.GameCore
         public uint MaxBlockId => _maxBlockId;
 
         public List<BlockView> AllowedBlocks => _allowedBlocks;
+
+        public Vector2 OffsetRoot => _offsetRoot;
+
+        [SerializeField]
+        Vector2 _offsetRoot = new Vector2(1.0f, -1.0f);
     }
 }

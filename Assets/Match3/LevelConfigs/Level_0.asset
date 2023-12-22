@@ -39,3 +39,4 @@ MonoBehaviour:
   - {fileID: -7804592598447823516, guid: 44e661f6fae804792828a7dbf7f5149b, type: 3}
   _minBlockId: 1
   _maxBlockId: 5
+  _offsetRoot: {x: 1, y: -1}

@@ -54,7 +54,7 @@ namespace Match3.GameCore
 
         public override void OnInspectorGUI()
         {
-            //DrawDefaultInspector();
+           
             serializedObject.Update();
 
             EditorGUILayout.HelpBox("PREVIEW", MessageType.Warning);
@@ -121,6 +121,8 @@ namespace Match3.GameCore
                     EditorGUILayout.EndHorizontal();
                 }
             }
+            
+            base.DrawDefaultInspector();
         }
     }
 }

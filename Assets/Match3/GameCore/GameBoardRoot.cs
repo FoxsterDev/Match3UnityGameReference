@@ -12,6 +12,9 @@ namespace Match3.GameCore
         RectTransform _rectTransform = null;
 
         [SerializeField]
+        Transform _rootTransform = null;
+        
+        [SerializeField]
         GameBoardController _boardController;
 
         void Start()
@@ -19,12 +22,15 @@ namespace Match3.GameCore
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
-            _boardController = new GameBoardController(_levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount, _rectTransform.transform);
+            _boardController = new GameBoardController(_levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount, _rootTransform);
 
-            //var startPosition = v[1];
+            var initPosition = v[1];
+            initPosition += (Vector3)_levelConfig.OffsetRoot;
+            _rootTransform.localPosition = _levelConfig.OffsetRoot;
+
             for (var row = 0; row < _levelConfig.RowCount; row++)
             {
-                var startPosition = v[1];
+                var startPosition = initPosition;
                 startPosition.y -= 1.33f * row;
                 for (var col = 0; col < _levelConfig.ColumnCount; col++)
                 {
@@ -45,15 +51,17 @@ namespace Match3.GameCore
 
         void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
-
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
-            for (var i = 0; i < 4; i++)
-            {
-                Gizmos.DrawSphere(v[i], 0.1f);
-            }
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(v[0], 0.1f);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(v[1], 0.1f); 
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(v[2], 0.1f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(v[3], 0.1f);
         }
 
         void OnValidate()
