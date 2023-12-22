@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Match3.GameCore
 {
@@ -10,27 +9,28 @@ namespace Match3.GameCore
         [SerializeField]
         [Range(3, 10)]
         uint _columnCount = 4;
+
         [SerializeField]
         [Range(3, 10)]
         uint _rowCount = 4;
 
         /// <summary>
         /// [0,0] is the first, left up
-        /// [0,1] is the second row 
+        /// [0,1] is the second row
         /// </summary>
         [SerializeField]
-        List<BlockConfig> _blocks = new List<BlockConfig>(16);
+        List<BlockConfig> _blocks = new(16);
 
         [SerializeField]
-        List<BlockView> _allowedBlocks = new List<BlockView>(5);
+        List<BlockView> _allowedBlocks = new(5);
 
         [SerializeField]
         [Range(1, 4)]
         uint _minBlockId = 1;
+
         [SerializeField]
         [Range(2, 5)]
         uint _maxBlockId = 5;
-
 
         public uint ColumnCount => _columnCount;
 
@@ -38,7 +38,7 @@ namespace Match3.GameCore
 
         /// <summary>
         /// [0,0] is the first, left up
-        /// [0,1] is the second row 
+        /// [0,1] is the second row
         /// </summary>
         public List<BlockConfig> Blocks => _blocks;
 

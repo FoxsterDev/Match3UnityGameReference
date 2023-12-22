@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,31 +6,16 @@ namespace Match3.GameCore
 {
     public class Match3AndMoreInHorizontalOrVerticalPattern : IMatchPattern
     {
-        /// <summary>
-        ///  0, 1, 0, 2
-        ///  0, 0, 2, 3
-        ///  0, 1, 1, 4
-        /// </summary>
-        /// <param name="board"></param>
-        /// <returns></returns>
-        public bool IsMatched(uint[,] board)
-        {
-            return IsMatched(
-                board,
-                out var matchesInTheRow,
-                out var matchesInTheColumn);
-        }
-
-        public bool IsMatched(uint[,] board, 
+        public bool IsMatched(uint[,] board,
                               out List<List<(int row, int column, uint id)>> matchesInTheRow,
-                              out List<List<(int row, int column, uint id)>> matchesInTheColumn, 
+                              out List<List<(int row, int column, uint id)>> matchesInTheColumn,
                               params uint[] skipID)
         {
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 
-            var isMatchedInTheRow = HasMatchesInTheRow(board, rowsCount, columnsCount, out  matchesInTheRow);
-            var isMatchedInTheColumn = HasMatchesInTheColumn(board, rowsCount, columnsCount, out  matchesInTheColumn);
+            var isMatchedInTheRow = HasMatchesInTheRow(board, rowsCount, columnsCount, out matchesInTheRow);
+            var isMatchedInTheColumn = HasMatchesInTheColumn(board, rowsCount, columnsCount, out matchesInTheColumn);
 
             if (isMatchedInTheRow)
             {
@@ -42,13 +28,29 @@ namespace Match3.GameCore
                 matchesInTheColumn = matchesInTheColumn.Where(m => m[0].id != 0).ToList();
                 isMatchedInTheColumn = matchesInTheColumn.Count > 0;
             }
+
             return isMatchedInTheRow || isMatchedInTheColumn;
         }
 
+        /// <summary>
+        /// 0, 1, 0, 2
+        /// 0, 0, 2, 3
+        /// 0, 1, 1, 4
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
+        public bool IsMatched(uint[,] board)
+        {
+            return IsMatched(
+                board,
+                out var matchesInTheRow,
+                out var matchesInTheColumn);
+        }
+
         bool HasMatchesInTheColumn(uint[,] board,
-                                int rowsCount,
-                                int columnsCount, 
-                                out List<List<(int row, int column, uint id)>> matches)
+                                   int rowsCount,
+                                   int columnsCount,
+                                   out List<List<(int row, int column, uint id)>> matches)
         {
             matches = new List<List<(int row, int column, uint id)>>(1);
 
@@ -65,7 +67,7 @@ namespace Match3.GameCore
                     if (startId == id)
                     {
                         matchCount += 1;
-                        matchList.Add(new(row, col, id));
+                        matchList.Add(new ValueTuple<int, int, uint>(row, col, id));
                     }
                     else
                     {
@@ -89,10 +91,11 @@ namespace Match3.GameCore
 
             return matches.Count > 0;
         }
-         bool HasMatchesInTheRow(uint[,] board,
-                                      int rowsCount,
-                                      int columnsCount, 
-                                      out List<List<(int row, int column, uint id)>> matches)
+
+        bool HasMatchesInTheRow(uint[,] board,
+                                int rowsCount,
+                                int columnsCount,
+                                out List<List<(int row, int column, uint id)>> matches)
         {
             matches = new List<List<(int row, int column, uint id)>>(1);
 
@@ -108,7 +111,7 @@ namespace Match3.GameCore
                     if (startId == id)
                     {
                         matchCount += 1;
-                        matchList.Add(new(row, col, id));
+                        matchList.Add(new ValueTuple<int, int, uint>(row, col, id));
                     }
                     else
                     {
@@ -120,7 +123,7 @@ namespace Match3.GameCore
 
                         startId = id;
                         matchCount = 1;
-                        matchList = new List<(int row, int column, uint id)>(3){ new(row, col, id) };
+                        matchList = new List<(int row, int column, uint id)>(3) { new(row, col, id) };
                     }
                 }
 

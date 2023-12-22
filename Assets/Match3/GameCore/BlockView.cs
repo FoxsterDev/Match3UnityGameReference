@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Match3.GameCore
@@ -9,9 +8,9 @@ namespace Match3.GameCore
         uint _id = 0;
 
         uint IBlockView.ID => _id;
+
         public void Dispose()
         {
-
         }
     }
 }

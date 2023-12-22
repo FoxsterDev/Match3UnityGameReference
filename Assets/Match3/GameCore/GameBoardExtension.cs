@@ -26,7 +26,7 @@ namespace Match3.GameCore
 
         public static string ConvertToString(this uint[,] board)
         {
-            string output = "";
+            var output = "";
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 

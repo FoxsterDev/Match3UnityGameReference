@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Match3.GameCore
 {
@@ -19,15 +18,17 @@ namespace Match3.GameCore
 
     public class GameBoardController : IDisposable
     {
-        readonly BlockEntity[,] _board;
-        readonly uint _columnCount;
-        readonly ICompacting _compacting;
-        readonly IMatchPattern _matchPattern;
         readonly IBlocksGenerator _blocksGenerator;
-        readonly GameLevelConfig _levelConfig;
-        readonly uint _rowCount;
+        readonly BlockEntity[,] _board;
 
         readonly Transform _boardTransformParent;
+        readonly uint _columnCount;
+        readonly ICompacting _compacting;
+        readonly GameLevelConfig _levelConfig;
+        readonly IMatchPattern _matchPattern;
+
+        readonly uint _rowCount;
+
         //rethink
         readonly ScoreController _scoreController;
 
@@ -35,7 +36,8 @@ namespace Match3.GameCore
 
         public GameBoardController(GameLevelConfig levelConfig,
                                    uint rowCount,
-                                   uint columnCount, Transform boardTransformParent)
+                                   uint columnCount,
+                                   Transform boardTransformParent)
         {
             _levelConfig = levelConfig;
             _rowCount = rowCount;
@@ -48,9 +50,13 @@ namespace Match3.GameCore
             _blocksGenerator = new GameBoardBlocksGenerator(levelConfig);
         }
 
+        public void Dispose()
+        {
+        }
+
         GameObject GetBlockPrefabById(uint id)
         {
-            var blockView = _levelConfig.AllowedBlocks.Find(b => (((IBlockView) b).ID == id));
+            var blockView = _levelConfig.AllowedBlocks.Find(b => ((IBlockView) b).ID == id);
             if (blockView != null)
             {
                 return blockView.gameObject;
@@ -61,11 +67,10 @@ namespace Match3.GameCore
             }
         }
 
-        public void Dispose()
-        {
-        }
-
-        public void CreateBlock(int rowIndex, int columnIndex, GameObject prefab, Vector3 position)
+        public void CreateBlock(int rowIndex,
+                                int columnIndex,
+                                GameObject prefab,
+                                Vector3 position)
         {
             //pool
             var blockGameObjectInstance = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity, _boardTransformParent);

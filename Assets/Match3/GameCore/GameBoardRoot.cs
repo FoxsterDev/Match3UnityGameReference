@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Match3.GameCore
@@ -17,11 +16,10 @@ namespace Match3.GameCore
 
         void Start()
         {
-            
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
-            _boardController = new GameBoardController( _levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount, _rectTransform.transform);
+            _boardController = new GameBoardController(_levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount, _rectTransform.transform);
 
             //var startPosition = v[1];
             for (var row = 0; row < _levelConfig.RowCount; row++)
@@ -30,10 +28,10 @@ namespace Match3.GameCore
                 startPosition.y -= 1.33f * row;
                 for (var col = 0; col < _levelConfig.ColumnCount; col++)
                 {
-                    var index = (int)(row * _levelConfig.ColumnCount + col);
+                    var index = (int) (row * _levelConfig.ColumnCount + col);
                     var prefab = _levelConfig.Blocks[index].Prefab;
 
-                    _boardController.CreateBlock( row, col, prefab, startPosition);
+                    _boardController.CreateBlock(row, col, prefab, startPosition);
 
                     startPosition.x += 1.27f;
                 }

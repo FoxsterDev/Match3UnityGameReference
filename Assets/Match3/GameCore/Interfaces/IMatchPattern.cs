@@ -4,10 +4,9 @@ namespace Match3.GameCore
 {
     public interface IMatchPattern
     {
-        bool IsMatched(uint[,] board, 
+        bool IsMatched(uint[,] board,
                        out List<List<(int row, int column, uint id)>> matchesInTheRow,
-                       out List<List<(int row, int column, uint id)>> matchesInTheColumn, 
+                       out List<List<(int row, int column, uint id)>> matchesInTheColumn,
                        params uint[] skipID);
-
     }
 }

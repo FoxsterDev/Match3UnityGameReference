@@ -4,7 +4,9 @@ namespace Match3.GameCore
 {
     public class GameBoardCompacting : ICompacting
     {
-        public void Compact(uint[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts, out uint[,] outBoard)
+        public void Compact(uint[,] board,
+                            out List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts,
+                            out uint[,] outBoard)
         {
             shifts = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>(1);
             var rowsCount = board.GetLength(0);
@@ -22,7 +24,7 @@ namespace Match3.GameCore
                             startEmptyRow = row;
                         }
                     }
-                    else if(startEmptyRow > -1)
+                    else if (startEmptyRow > -1)
                     {
                         var currentBlock = board[row, col];
                         var emptyBlock = board[startEmptyRow, col];

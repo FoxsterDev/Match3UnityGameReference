@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Match3.GameCore
 {
-    [System.Serializable]
+    [Serializable]
     public class BlockConfig
     {
         /// <summary>

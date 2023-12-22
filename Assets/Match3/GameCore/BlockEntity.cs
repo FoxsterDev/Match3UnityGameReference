@@ -37,7 +37,6 @@ namespace Match3.GameCore
         public Vector3 Position => _position;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="other">Also might be Empty block with Null View</param>
         public void SwapWith(BlockEntity other)
@@ -54,7 +53,7 @@ namespace Match3.GameCore
             (_position, other._position) = (other._position, _position);
 
             if (!other.IsEmpty)
-            { 
+            {
                 SyncName();
                 other.SyncName();
                 //animate view translate
