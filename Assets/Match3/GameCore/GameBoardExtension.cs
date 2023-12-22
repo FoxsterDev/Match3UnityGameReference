@@ -7,7 +7,7 @@ namespace Match3.GameCore
         /// </summary>
         /// <param name="board"></param>
         /// <returns>converted matrix with block id</returns>
-        public static uint[,] ConvertBoardToIntMatrix(this BlockEntity[,] board)
+        public static uint[,] ConvertToIntMatrix(this BlockEntity[,] board)
         {
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);

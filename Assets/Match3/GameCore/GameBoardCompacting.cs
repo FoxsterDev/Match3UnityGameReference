@@ -40,10 +40,5 @@ namespace Match3.GameCore
 
             outBoard = board;
         }
-
-        public void Compact(BlockEntity[,] board, out List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts)
-        {
-            Compact(board.ConvertBoardToIntMatrix(), out shifts, out var outBoard);
-        }
     }
 }

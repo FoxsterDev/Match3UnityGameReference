@@ -12,16 +12,6 @@ namespace Match3.GameCore
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public bool IsMatched(BlockEntity[,] board, 
-                              out List<List<(int row, int column, uint id)>> matchesInTheRow,
-                              out List<List<(int row, int column, uint id)>> matchesInTheColumn, 
-                              params uint[] skipID)
-        {
-            return IsMatched(board.ConvertBoardToIntMatrix(), 
-                             out  matchesInTheRow,
-                             out  matchesInTheColumn, skipID );
-        }
-
         public bool IsMatched(uint[,] board)
         {
             return IsMatched(

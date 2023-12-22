@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Match3.GameCore
 {
@@ -23,8 +24,10 @@ namespace Match3.GameCore
         readonly ICompacting _compacting;
         readonly IMatchPattern _matchPattern;
         readonly IBlocksGenerator _blocksGenerator;
+        readonly GameLevelConfig _levelConfig;
         readonly uint _rowCount;
 
+        readonly Transform _boardTransformParent;
         //rethink
         readonly ScoreController _scoreController;
 
@@ -32,11 +35,12 @@ namespace Match3.GameCore
 
         public GameBoardController(GameLevelConfig levelConfig,
                                    uint rowCount,
-                                   uint columnCount)
+                                   uint columnCount, Transform boardTransformParent)
         {
+            _levelConfig = levelConfig;
             _rowCount = rowCount;
             _columnCount = columnCount;
-
+            _boardTransformParent = boardTransformParent;
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new Match3AndMoreInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
@@ -44,16 +48,30 @@ namespace Match3.GameCore
             _blocksGenerator = new GameBoardBlocksGenerator(levelConfig);
         }
 
+        GameObject GetBlockPrefabById(uint id)
+        {
+            var blockView = _levelConfig.AllowedBlocks.Find(b => (((IBlockView) b).ID == id));
+            if (blockView != null)
+            {
+                return blockView.gameObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void Dispose()
         {
         }
 
-        public void AddBlock(
-            int rowIndex,
-            int columnIndex,
-            IBlockView blockView,
-            IBlockUserInputEvent blockUserInput)
+        public void CreateBlock(int rowIndex, int columnIndex, GameObject prefab, Vector3 position)
         {
+            //pool
+            var blockGameObjectInstance = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity, _boardTransformParent);
+            var blockUserInput = blockGameObjectInstance.GetComponent<IBlockUserInputEvent>();
+            var blockView = blockGameObjectInstance.GetComponent<IBlockView>();
+
             var block = new BlockEntity(rowIndex, columnIndex, blockView, blockUserInput);
             _board[rowIndex, columnIndex] = block;
 
@@ -74,7 +92,20 @@ namespace Match3.GameCore
             entity.Destroy();
         }
 
-        public void AnimateCompacting(List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts)
+        void AnimateNewBlocks(List<(int row, int column, uint id)> blocks)
+        {
+            Debug.Log(nameof(AnimateNewBlocks) + string.Join(",", blocks));
+
+            for (var index = 0; index < blocks.Count; index++)
+            {
+                var block = blocks[index];
+                var prefab = GetBlockPrefabById(block.id);
+                var entry = _board[block.row, block.column];
+                CreateBlock(block.row, block.column, prefab, entry.Position);
+            }
+        }
+
+        void AnimateCompacting(List<(int startRow, int startColumn, int targetRow, int targetColumn)> shifts)
         {
             //  //async animate this
             foreach (var shift in shifts)
@@ -113,55 +144,47 @@ namespace Match3.GameCore
 
             Debug.Log(
                 nameof(OnMoveUserInputEvent) + " ,direction=" + direction + " for " + currentBlock + " , " + nameof(isMoveAllowed) + "=>" + isMoveAllowed);
+
             if (isMoveAllowed)
             {
                 var targetBlock = _board[rowIndexNew, columnIndexNew];
-                //update board 
+                //update board
                 _board[rowIndexNew, columnIndexNew] = currentBlock;
                 _board[currentBlock.RowIndex, currentBlock.ColumnIndex] = targetBlock;
 
                 //async animate this
                 currentBlock.SwapWith(targetBlock);
 
+                Repeat:
                 var hasMatch = _matchPattern.IsMatched(
-                    _board,
+                    _board.ConvertToIntMatrix(),
                     out var matchesInTheRow,
                     out var matchesInTheColumn,
                     BlockEntity.EMPTY_ID);
 
                 if (hasMatch)
                 {
-                    //animate matches
                     AnimateMatches(matchesInTheRow, matchesInTheColumn);
-                    //calculate score
                     _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
-                    //Animate Scoring
 
-                    //animate compacting
-                    _compacting.Compact(_board, out var shifts);
-                    AnimateCompacting(shifts); //modify board
+                    _compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard1);
+                    AnimateCompacting(shifts);
 
-                    //create new blocks
-                    _blocksGenerator.Generate(_board, out var newBlocks);
+                    _blocksGenerator.Generate(_board.ConvertToIntMatrix(), out var newBlocks, out var outBoard2);
+                    AnimateNewBlocks(newBlocks);
+
+                    goto Repeat;
                 }
                 else
                 {
                     Debug.Log("No pattern found");
-                    //animate compacting
-                    _compacting.Compact(_board, out var shifts);
-                    AnimateCompacting(shifts);
                     //swap back blocks as candy crash
+
+                    //targetBlock.SwapWith(currentBlock);
+
+                    //_compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard3);
+                    //AnimateCompacting(shifts);
                 }
-                //check pattern
-
-                //build animations
-
-                //animate the change 
-
-                //check pattern: 3 and more in horizontal or vertical
-                //play animation depends on pattern
-                //if success animate shifts
-                //create new elements
             }
         }
 

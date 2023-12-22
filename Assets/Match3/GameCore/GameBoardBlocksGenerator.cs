@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Match3.GameCore
 {
@@ -8,29 +8,27 @@ namespace Match3.GameCore
     /// </summary>
     public class GameBoardBlocksGenerator : IBlocksGenerator
     {
-        readonly uint _minBlockId;
         readonly uint _maxBlockId;
-    
+        readonly uint _minBlockId;
+
         public GameBoardBlocksGenerator(GameLevelConfig levelConfig)
         {
             _minBlockId = levelConfig.MinBlockId;
             _maxBlockId = levelConfig.MaxBlockId;
         }
 
-        public GameBoardBlocksGenerator(uint minBlockId , uint maxBlockId)
+        public GameBoardBlocksGenerator(uint minBlockId, uint maxBlockId)
         {
             _minBlockId = minBlockId;
             _maxBlockId = maxBlockId;
         }
 
-        uint GenerateNewBlockId()
-        {
-            return (uint)UnityEngine.Random.Range(_minBlockId, _maxBlockId + 1);
-        }
-
-        public void Generate(uint[,] board, out List<(int row, int column, uint id)> blocks)
+        public void Generate(uint[,] board,
+                             out List<(int row, int column, uint id)> blocks,
+                             out uint[,] outBoard)
         {
             blocks = new List<(int row, int column, uint id)>(1);
+
             var rowsCount = board.GetLength(0);
             var columnsCount = board.GetLength(1);
 
@@ -42,14 +40,17 @@ namespace Match3.GameCore
                     {
                         var blockId = GenerateNewBlockId();
                         blocks.Add((row, col, blockId));
+                        board[row, col] = blockId;
                     }
                 }
             }
+
+            outBoard = board;
         }
 
-        public void Generate(BlockEntity[,] board, out List<(int row, int column, uint id)> blocks)
+        uint GenerateNewBlockId()
         {
-           Generate(board.ConvertBoardToIntMatrix(), out blocks);
+            return (uint) Random.Range(_minBlockId, _maxBlockId + 1);
         }
     }
 }

@@ -34,7 +34,8 @@ namespace Match3.GameCore
         public bool IsEmpty => View is null;
         Transform Body => ((MonoBehaviour) View).transform;
 
-      
+        public Vector3 Position => _position;
+
         /// <summary>
         /// 
         /// </summary>

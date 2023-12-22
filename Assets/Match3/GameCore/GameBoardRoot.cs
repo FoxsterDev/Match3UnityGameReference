@@ -21,7 +21,7 @@ namespace Match3.GameCore
             var v = new Vector3[4];
             _rectTransform.GetWorldCorners(v);
 
-            _boardController = new GameBoardController( _levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount);
+            _boardController = new GameBoardController( _levelConfig, _levelConfig.RowCount, _levelConfig.ColumnCount, _rectTransform.transform);
 
             //var startPosition = v[1];
             for (var row = 0; row < _levelConfig.RowCount; row++)
@@ -33,13 +33,9 @@ namespace Match3.GameCore
                     var index = (int)(row * _levelConfig.ColumnCount + col);
                     var prefab = _levelConfig.Blocks[index].Prefab;
 
-                    var blockInstance = Instantiate(prefab, startPosition, Quaternion.identity, _rectTransform.transform);
+                    _boardController.CreateBlock( row, col, prefab, startPosition);
+
                     startPosition.x += 1.27f;
-
-                    var userInput = blockInstance.GetComponent<IBlockUserInputEvent>();
-                    var blockView = blockInstance.GetComponent<IBlockView>();
-
-                    _boardController.AddBlock( row, col, blockView, userInput);
                 }
             }
         }
