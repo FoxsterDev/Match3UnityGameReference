@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Match3.GameCore
 {
@@ -50,7 +51,19 @@ namespace Match3.GameCore
 
         public Vector2 OffsetRoot => _offsetRoot;
 
+        public uint Moves => _moves;
+
         [SerializeField]
         Vector2 _offsetRoot = new Vector2(1.0f, -1.0f);
+
+        uint _moves = 10;
+
+        [SerializeReference] //https://blog.unity.com/engine-platform/serializereference-improvements-in-unity-2021-lts
+        public List<ILevelGoal> Goals = new List<ILevelGoal>
+        {
+            new CollectWithId{ Count = 5, Id = 1}, 
+            new FinishLevelForTheLimitedMoves{ Moves = 10},
+            new FinishLevelForTheLimitedTime{ TimeInSeconds = 60}
+        };
     }
 }
