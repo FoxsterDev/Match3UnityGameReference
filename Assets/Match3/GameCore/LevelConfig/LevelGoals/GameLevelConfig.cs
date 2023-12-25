@@ -56,6 +56,7 @@ namespace Match3.GameCore
         [SerializeField]
         Vector2 _offsetRoot = new Vector2(1.0f, -1.0f);
 
+        [SerializeField]
         uint _moves = 10;
 
         [SerializeReference] //https://blog.unity.com/engine-platform/serializereference-improvements-in-unity-2021-lts
