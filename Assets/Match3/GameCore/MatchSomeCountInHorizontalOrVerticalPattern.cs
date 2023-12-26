@@ -4,8 +4,23 @@ using System.Linq;
 
 namespace Match3.GameCore
 {
-    public class Match3AndMoreInHorizontalOrVerticalPattern : IMatchPattern
+    public enum PatternOperator
     {
+        MoreOrEqual = 0,
+        Equal
+    }
+
+    public class MatchSomeCountInHorizontalOrVerticalPattern : IMatchPattern
+    {
+        readonly PatternOperator _operator;
+        readonly uint _trackCount;
+
+        public MatchSomeCountInHorizontalOrVerticalPattern(uint trackCount = 3, PatternOperator oper = PatternOperator.MoreOrEqual)
+        {
+            _trackCount = trackCount;
+            _operator = oper;
+        }
+
         public bool IsMatched(uint[,] board,
                               out List<List<(int row, int column, uint id)>> matchesInTheRow,
                               out List<List<(int row, int column, uint id)>> matchesInTheColumn,
@@ -71,9 +86,10 @@ namespace Match3.GameCore
                     }
                     else
                     {
-                        if (matchCount >= 3) // in the same row but different id
+                        if (_operator == PatternOperator.MoreOrEqual
+                                ? matchCount >= _trackCount
+                                : matchCount == _trackCount) // in the same row but different id
                         {
-                            //save it
                             matches.Add(matchList);
                         }
 
@@ -83,7 +99,9 @@ namespace Match3.GameCore
                     }
                 }
 
-                if (matchCount >= 3) //has match
+                if (_operator == PatternOperator.MoreOrEqual
+                        ? matchCount >= _trackCount
+                        : matchCount == _trackCount) //has match
                 {
                     matches.Add(matchList);
                 }
@@ -115,7 +133,9 @@ namespace Match3.GameCore
                     }
                     else
                     {
-                        if (matchCount >= 3) // in the same row but different id
+                        if (_operator == PatternOperator.MoreOrEqual
+                                ? matchCount >= _trackCount
+                                : matchCount == _trackCount) // in the same row but different id
                         {
                             //save it
                             matches.Add(matchList);
@@ -127,7 +147,9 @@ namespace Match3.GameCore
                     }
                 }
 
-                if (matchCount >= 3) //has match
+                if (_operator == PatternOperator.MoreOrEqual
+                        ? matchCount >= _trackCount
+                        : matchCount == _trackCount) //has match
                 {
                     matches.Add(matchList);
                 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -10,7 +9,7 @@ namespace Match3.GameCore.Tests
         {
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 0 },
@@ -27,7 +26,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 4 },
@@ -44,7 +43,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 0 },
@@ -61,7 +60,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 0 },
@@ -78,7 +77,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 4 },
@@ -95,7 +94,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 3 },
@@ -112,7 +111,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 3 },
@@ -131,7 +130,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 0 },
@@ -150,7 +149,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 4 },
@@ -169,7 +168,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 0 },
                     { 1, 2, 3, 4 },
@@ -188,7 +187,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 4 },
@@ -207,7 +206,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 0 },
@@ -226,7 +225,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 0 },
@@ -245,7 +244,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 0 },
@@ -264,7 +263,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 3 },
@@ -281,7 +280,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 1, 2, 3, 2 },
@@ -298,7 +297,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 0, 2, 3, 2 },
@@ -315,7 +314,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 0, 2, 3, 4 },
                     { 1, 2, 3, 2 },
@@ -332,7 +331,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 2, 2, 3, 4 },
                     { 1, 2, 3, 2 },
@@ -349,7 +348,7 @@ namespace Match3.GameCore.Tests
             };
             yield return new TestDataWrapper<uint[,], uint[,]>
             {
-                Value =  new uint[,]
+                Value = new uint[,]
                 {
                     { 1, 2, 3, 4 },
                     { 0, 2, 3, 2 },
@@ -421,7 +420,8 @@ namespace Match3.GameCore.Tests
             };
         }
 
-        public static IEnumerable<TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>> BoardHasShiftsInOneColumnTestCases()
+        public static IEnumerable<TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>>
+            BoardHasShiftsInOneColumnTestCases()
         {
             yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
             {
@@ -434,7 +434,7 @@ namespace Match3.GameCore.Tests
                 },
                 Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
                 {
-                    ( 0, 3, 3, 3 ),
+                    (0, 3, 3, 3)
                 }
             };
             yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
@@ -448,7 +448,7 @@ namespace Match3.GameCore.Tests
                 },
                 Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
                 {
-                    ( 1, 3, 3, 3 ),
+                    (1, 3, 3, 3)
                 }
             };
             yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
@@ -462,7 +462,7 @@ namespace Match3.GameCore.Tests
                 },
                 Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
                 {
-                    ( 2, 3, 3, 3 ),
+                    (2, 3, 3, 3)
                 }
             };
             yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
@@ -476,8 +476,8 @@ namespace Match3.GameCore.Tests
                 },
                 Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
                 {
-                    ( 1, 3, 3, 3 ),
-                    ( 0, 3, 2, 3 )
+                    (1, 3, 3, 3),
+                    (0, 3, 2, 3)
                 }
             };
             yield return new TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>>
@@ -491,37 +491,35 @@ namespace Match3.GameCore.Tests
                 },
                 Expected = new List<(int startRow, int startColumn, int targetRow, int targetColumn)>
                 {
-                    ( 1, 3, 3, 3 ),
-                    ( 0, 3, 2, 3 ),
-                    ( 1, 1, 2, 1 ),
-                    ( 0, 1, 1, 1 )
+                    (1, 3, 3, 3),
+                    (0, 3, 2, 3),
+                    (1, 1, 2, 1),
+                    (0, 1, 1, 1)
                 }
             };
         }
 
-        public class TestDataWrapper<T, TExp>
-        {
-            public T? Value { get; set; }
-            public TExp? Expected { get; set; }
-        }
-
         [TestCaseSource(nameof(BoardHasShiftsInOneColumnTestCases))]
-        public void isCompacted_WhenBoardHasShiftsInOneColumn_True(TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>> td)
+        public void isCompacted_WhenBoardHasShiftsInOneColumn_True(
+            TestDataWrapper<uint[,], List<(int startRow, int startColumn, int targetRow, int targetColumn)>> td)
         {
             //arrange
             var compacting = new GameBoardCompacting();
             //act
             compacting.Compact(td.Value, out var shifts, out var outBoard);
             //assert
-            Assert.IsTrue(IsShiftsEqual(shifts, td.Expected), $"After compacting expected shifts are not equal");
+            Assert.IsTrue(IsShiftsEqual(shifts, td.Expected), "After compacting expected shifts are not equal");
         }
 
-        static bool IsShiftsEqual(List<(int startRow, int startColumn, int targetRow, int targetColumn)> source, 
+        static bool IsShiftsEqual(List<(int startRow, int startColumn, int targetRow, int targetColumn)> source,
                                   List<(int startRow, int startColumn, int targetRow, int targetColumn)> target)
         {
             var count = source.Count;
             var count2 = target.Count;
-            if (count != count2) return false;
+            if (count != count2)
+            {
+                return false;
+            }
 
             for (var index = 0; index < source.Count; index++)
             {
@@ -568,6 +566,12 @@ namespace Match3.GameCore.Tests
             //arrange
             //act
             //assert
+        }
+
+        public class TestDataWrapper<T, TExp>
+        {
+            public T? Value { get; set; }
+            public TExp? Expected { get; set; }
         }
     }
 }

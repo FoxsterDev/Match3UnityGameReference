@@ -44,7 +44,7 @@ namespace Match3.GameCore
             _columnCount = columnCount;
             _boardTransformParent = boardTransformParent;
             _board = new BlockEntity[_rowCount, _columnCount];
-            _matchPattern = new Match3AndMoreInHorizontalOrVerticalPattern();
+            _matchPattern = new MatchSomeCountInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
             _compacting = new GameBoardCompacting();
             _blocksGenerator = new GameBoardBlocksGenerator(levelConfig);
