@@ -86,11 +86,5 @@ namespace Match3.GameCore.Tests
             //act
             //assert
         }
-
-        public class TestDataWrapper<T, TExp>
-        {
-            public T? Value { get; set; }
-            public TExp? Expected { get; set; }
-        }
     }
 }

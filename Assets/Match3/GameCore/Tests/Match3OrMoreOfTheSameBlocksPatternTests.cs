@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Match3.GameCore.Tests
@@ -480,6 +482,183 @@ namespace Match3.GameCore.Tests
                 { 14, 1, 3, 1, 28 }
             }
         };
+
+        public static IEnumerable<TestDataWrapper<uint[,], List<(int row, int column, uint id)>>> BoardHasTheOneMatchInTheColumnTestCases()
+        {
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 2, 3, 2 },
+                    { 1, 2, 3, 1 },
+                    { 1, 10, 1, 2 },
+                    { 13, 14, 15, 4 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (0, 0, 1),
+                    (1, 0, 1),
+                    (2, 0, 1)
+                }
+            };
+        }
+
+        public static IEnumerable<TestDataWrapper<uint[,], List<(int row, int column, uint id)>>> BoardHasTheOneMatchInTheRowTestCases()
+        {
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 1, 1, 2 },
+                    { 1, 2, 3, 1 },
+                    { 9, 10, 1, 2 },
+                    { 13, 14, 15, 4 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (0, 0, 1),
+                    (0, 1, 1),
+                    (0, 2, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 2, 3, 1 },
+                    { 1, 1, 1, 2 },
+                    { 9, 10, 1, 2 },
+                    { 13, 14, 15, 4 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (1, 0, 1),
+                    (1, 1, 1),
+                    (1, 2, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 2, 3, 1 },
+                    { 9, 10, 1, 2 },
+                    { 1, 1, 1, 2 },
+                    { 13, 14, 15, 4 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (2, 0, 1),
+                    (2, 1, 1),
+                    (2, 2, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 1, 2, 3, 1 },
+                    { 9, 10, 1, 2 },
+                    { 13, 14, 15, 4 },
+                    { 1, 1, 1, 2 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (3, 0, 1),
+                    (3, 1, 1),
+                    (3, 2, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 3, 2, 3, 1 },
+                    { 2, 9, 10, 1 },
+                    { 1, 3, 14, 15 },
+                    { 2, 1, 1, 1 }
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (3, 1, 1),
+                    (3, 2, 1),
+                    (3, 3, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 3, 2, 3, 1 },
+                    { 2, 9, 10, 1 },
+                    { 2, 1, 1, 1 },
+                    { 1, 3, 14, 15 }
+                   
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (2, 1, 1),
+                    (2, 2, 1),
+                    (2, 3, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 3, 2, 3, 1 },
+                    { 2, 1, 1, 1 },
+                    { 2, 9, 10, 1 },
+                    { 1, 3, 14, 15 }
+                   
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (1, 1, 1),
+                    (1, 2, 1),
+                    (1, 3, 1)
+                }
+            };
+            yield return new TestDataWrapper<uint[,], List<(int row, int column, uint id)>>
+            {
+                Value = new uint[,]
+                {
+                    { 2, 1, 1, 1 },
+                    { 3, 2, 3, 1 },
+                    { 2, 9, 10, 1 },
+                    { 1, 3, 14, 15 }
+                   
+                },
+                Expected = new List<(int row, int column, uint id)>
+                {
+                    (0, 1, 1),
+                    (0, 2, 1),
+                    (0, 3, 1)
+                }
+            };
+        }
+
+        [Test]
+        [TestCaseSource(nameof(BoardHasTheOneMatchInTheRowTestCases))]
+        public void isMatched_WhenBoardHasTheOneMatchInTheRowTestCases_True(TestDataWrapper<uint[,], List<(int row, int column, uint id)>> td)
+        {
+            //arrange
+            uint matchCount = 3;
+            int combinationsCount = 1;
+            var pattern = new MatchSomeCountInHorizontalOrVerticalPattern(matchCount, PatternOperator.Equal);
+
+            //act
+            var isMatched = pattern.IsMatched(td.Value, out var matchesInTheRow, out var matchesInTheColumn);
+
+            Assert.IsTrue(isMatched, "The board does not have matches");
+            Assert.IsTrue(matchesInTheRow.Count == combinationsCount, "Combinations count is wrong");
+
+            var match = matchesInTheRow[0];
+            Assert.IsTrue(match[0].column < match[1].column && match[1].column < match[2].column, "column is not sorted");
+            Assert.IsTrue(match[0].row == match[1].row && match[1].row == match[2].row, "row is different");
+
+            Assert.IsTrue(match.Count == td.Expected.Count && !match.Except(td.Expected).Any(), "Expected match is not the same from pattern checks");
+        }
 
         [Test]
         [TestCaseSource(nameof(BoardDoesNotHaveMatches3OrMoreTestCases))]
