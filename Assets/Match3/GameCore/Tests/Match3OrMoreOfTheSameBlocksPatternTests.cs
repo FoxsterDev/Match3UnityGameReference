@@ -30,12 +30,13 @@ namespace Match3.GameCore.Tests
             },
             new uint[,]
             {
-                { 2, 1,   2, 3, 25 },
-                { 5, 0,   3, 0, 6 },
+                { 2, 1, 2, 3, 25 },
+                { 5, 0, 3, 0, 6 },
                 { 10, 11, 0, 4, 0 },
                 { 13, 14, 0, 16, 16 }
             }
         };
+
         public static object[] BoardHasOnlyEmptyBlockMatchesCases =
         {
             new uint[,]
@@ -593,7 +594,6 @@ namespace Match3.GameCore.Tests
                     { 2, 9, 10, 1 },
                     { 2, 1, 1, 1 },
                     { 1, 3, 14, 15 }
-                   
                 },
                 Expected = new List<(int row, int column, uint id)>
                 {
@@ -610,7 +610,6 @@ namespace Match3.GameCore.Tests
                     { 2, 1, 1, 1 },
                     { 2, 9, 10, 1 },
                     { 1, 3, 14, 15 }
-                   
                 },
                 Expected = new List<(int row, int column, uint id)>
                 {
@@ -627,7 +626,6 @@ namespace Match3.GameCore.Tests
                     { 3, 2, 3, 1 },
                     { 2, 9, 10, 1 },
                     { 1, 3, 14, 15 }
-                   
                 },
                 Expected = new List<(int row, int column, uint id)>
                 {
@@ -644,7 +642,7 @@ namespace Match3.GameCore.Tests
         {
             //arrange
             uint matchCount = 3;
-            int combinationsCount = 1;
+            var combinationsCount = 1;
             var pattern = new MatchSomeCountInHorizontalOrVerticalPattern(matchCount, PatternOperator.Equal);
 
             //act
@@ -674,6 +672,7 @@ namespace Match3.GameCore.Tests
             Assert.IsFalse(isMatched, "The board does not have 3 or more matches");
             //add additional asserts
         }
+
         //
         [Test]
         [TestCaseSource(nameof(BoardHasOnlyEmptyBlockMatchesCases))]

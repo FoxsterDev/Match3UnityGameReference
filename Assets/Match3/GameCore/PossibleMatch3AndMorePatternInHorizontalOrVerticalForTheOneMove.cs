@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Match3.GameCore
 {
@@ -25,15 +24,12 @@ namespace Match3.GameCore
                 board, out var matchesInTheRow,
                 out var matchesInTheColumn, 0);
 
-            //Debug.Log("isMatchedInTheRowOrInTheColumn "+ isMatchedInTheRowOrInTheColumn);
             if (isMatchedInTheRowOrInTheColumn)
             {
                 foreach (var match in matchesInTheRow)
                 {
-                    //Debug.Log("matchesInTheRow "+ string.Join(",", match));
                     var potentialNeighbors = BuildPotentialNeighborsForTheRow(match);
                     DetectPossibleMatches(board, rowsCount, columnsCount, possibleMatches, potentialNeighbors, match);
-                   // Debug.Log("possibleMatches.count "+ (possibleMatches.Count));
                 }
 
                 foreach (var match in matchesInTheColumn)
@@ -109,7 +105,6 @@ namespace Match3.GameCore
                 throw new ArgumentException("Matches in the row in size more 2");
             }
 
-           
             /* 2 1 2 3
              * 1 0 1 2
              * 0 1 0 0
@@ -132,7 +127,7 @@ namespace Match3.GameCore
             var d0 = (second.row + 1, second.column - 1);
             var d1 = (second.row + 2, second.column);
             var d2 = (second.row + 1, second.column + 1);
-            
+
             var result = new List<(int row, int col)>(6)
             {
                 u0, u1, u2, d0, d1, d2
