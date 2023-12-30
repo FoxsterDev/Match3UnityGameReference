@@ -177,17 +177,18 @@ namespace Match3.GameCore
                     _compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard1);
                     AnimateCompacting(shifts);
 
-                    var tryCount = 5;
-                    var isPossibleMatches = false;
+                    var tryCount = 10;
+                    var hasPossibleMatches = false;
                     List<(int row, int column, uint id)> newBlocks;
                     do
                     {
                         _randomBlocksGenerator.Generate(_board.ConvertToIntMatrix(), out newBlocks, out var outBoard2);
-                        isPossibleMatches = _possibleMatchPattern.IsPossibleMatched(outBoard2, out var result, 0);
+                        hasPossibleMatches = _possibleMatchPattern.IsPossibleMatched(outBoard2, out var result, 0);
                     }
-                    while (!isPossibleMatches && tryCount-- > 0);
+                    while (!hasPossibleMatches && tryCount-- > 0);
 
-                    Debug.Log("IsPossibleMatched: " + isPossibleMatches +(5-tryCount));
+                    Debug.Log("Has Possible Matches: " + hasPossibleMatches +(5-tryCount));
+
                     AnimateNewBlocks(newBlocks);
 
                     goto Repeat;
