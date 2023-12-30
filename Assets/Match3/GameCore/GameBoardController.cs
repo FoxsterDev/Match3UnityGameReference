@@ -18,7 +18,7 @@ namespace Match3.GameCore
 
     public class GameBoardController : IDisposable
     {
-        readonly IBlocksGenerator _blocksGenerator;
+        readonly IBlocksGenerator _randomBlocksGenerator;
         readonly BlockEntity[,] _board;
 
         readonly Transform _boardTransformParent;
@@ -26,6 +26,7 @@ namespace Match3.GameCore
         readonly ICompacting _compacting;
         readonly GameLevelConfig _levelConfig;
         readonly IMatchPattern _matchPattern;
+        readonly IPossibleMatchPattern _possibleMatchPattern;
 
         readonly uint _rowCount;
 
@@ -47,7 +48,8 @@ namespace Match3.GameCore
             _matchPattern = new MatchSomeCountInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
             _compacting = new GameBoardCompacting();
-            _blocksGenerator = new GameBoardBlocksGenerator(levelConfig);
+            _randomBlocksGenerator = new GameBoardBlocksGenerator(levelConfig);
+            _possibleMatchPattern = new PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove();
         }
 
         public void Dispose()
@@ -175,7 +177,17 @@ namespace Match3.GameCore
                     _compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard1);
                     AnimateCompacting(shifts);
 
-                    _blocksGenerator.Generate(_board.ConvertToIntMatrix(), out var newBlocks, out var outBoard2);
+                    var tryCount = 5;
+                    var isPossibleMatches = false;
+                    List<(int row, int column, uint id)> newBlocks;
+                    do
+                    {
+                        _randomBlocksGenerator.Generate(_board.ConvertToIntMatrix(), out newBlocks, out var outBoard2);
+                        isPossibleMatches = _possibleMatchPattern.IsPossibleMatched(outBoard2, out var result, 0);
+                    }
+                    while (!isPossibleMatches && tryCount-- > 0);
+
+                    Debug.Log("IsPossibleMatched: " + isPossibleMatches +(5-tryCount));
                     AnimateNewBlocks(newBlocks);
 
                     goto Repeat;

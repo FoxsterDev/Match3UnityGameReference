@@ -322,7 +322,7 @@ namespace Match3.GameCore.Tests
         public void IsPossibleMatched_WhenBoardDoesNotHavePossibleMatches3OfTheSameBlocksInTheRowCases_False(uint[,] board)
         {
             //arrange
-            IPossibleMatchPattern pattern = new PossibleMatch3AndMorePatternInHorizontalOrVerticalForTheOneMove();
+            IPossibleMatchPattern pattern = new PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove();
 
             //act
             var isMatched = pattern.IsPossibleMatched(board, out var matches, 0);
@@ -336,7 +336,7 @@ namespace Match3.GameCore.Tests
         public void IsPossibleMatched_WhenBoardHasPossibleTheOneMatch3OfTheSameBlocksInTheRowCases_True(uint[,] board)
         {
             //arrange
-            IPossibleMatchPattern pattern = new PossibleMatch3AndMorePatternInHorizontalOrVerticalForTheOneMove();
+            IPossibleMatchPattern pattern = new PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove();
 
             //act
             var isMatched = pattern.IsPossibleMatched(board, out var matches, 0);

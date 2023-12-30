@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Match3.GameCore
 {
-    public class PossibleMatch3AndMorePatternInHorizontalOrVerticalForTheOneMove : IPossibleMatchPattern
+    public class PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove : IPossibleMatchPattern
     {
         readonly MatchSomeCountInHorizontalOrVerticalPattern _matchTwoExactlyInARowOrInAColumnPattern;
 
-        public PossibleMatch3AndMorePatternInHorizontalOrVerticalForTheOneMove()
+        public PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove()
         {
             _matchTwoExactlyInARowOrInAColumnPattern = new MatchSomeCountInHorizontalOrVerticalPattern(2, PatternOperator.Equal);
         }
@@ -40,6 +40,21 @@ namespace Match3.GameCore
 
                 return possibleMatches.Count > 0;
             }
+            else
+            {
+            /* 2 1 2 3
+             * 1 0 2 1
+             * 2 1 0 2
+             */ 
+            /* 1 0 1 3
+            *  2 1 2 3
+            *  2 2 0 2
+             *
+             * 2 1 2 3
+            *  1 0 1 3
+            *  2 2 0 2
+            */
+            }
 
             return false;
         }
@@ -71,7 +86,7 @@ namespace Match3.GameCore
         {
             if (match.Count != 2)
             {
-                throw new ArgumentException("Matches in the row in size more 2");
+                throw new ArgumentException("It works only for matches with 2 blocks");
             }
 
             /* 2 1 2 3
@@ -102,7 +117,7 @@ namespace Match3.GameCore
         {
             if (match.Count != 2)
             {
-                throw new ArgumentException("Matches in the row in size more 2");
+                throw new ArgumentException("It works only for matches with 2 blocks");
             }
 
             /* 2 1 2 3
