@@ -4,7 +4,7 @@ namespace Match3.GameCore.Tests
 {
     public class PossibleMatch3PatternTests
     {
-         public static object[] BoardDoesNotHavePossibleMatches3OfTheSameBlocksInTheRowCases =
+        public static object[] BoardDoesNotHavePossibleMatches3OfTheSameBlocksInTheRowCases =
         {
             new uint[,]
             {

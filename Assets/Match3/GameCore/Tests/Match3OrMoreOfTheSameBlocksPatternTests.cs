@@ -648,8 +648,8 @@ namespace Match3.GameCore.Tests
             //act
             var isMatched = pattern.IsMatched(td.Value, out var matchesInTheRow, out var matchesInTheColumn);
 
-            Assert.IsTrue(isMatched, "The board does not have matches");
-            Assert.IsTrue(matchesInTheRow.Count == combinationsCount, "Combinations count is wrong");
+            Assert.That(isMatched, Is.True, "The board does not have matches");
+            Assert.That(matchesInTheRow.Count , Is.EqualTo(combinationsCount), "Combinations count is wrong");
 
             var match = matchesInTheRow[0];
             Assert.IsTrue(match[0].column < match[1].column && match[1].column < match[2].column, "column is not sorted");

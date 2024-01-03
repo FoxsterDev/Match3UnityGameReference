@@ -1,0 +1,17 @@
+{
+    "name": "Match3.GameLevel",
+    "rootNamespace": "",
+    "references": [
+        "GUID:06dc53a90f03845a9adbdfe3877eb284",
+        "GUID:6b44a0deb16f64e969dcf4281d4fa868"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
