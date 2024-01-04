@@ -18,32 +18,31 @@ namespace Match3.GameCore
 
     public class GameBoardController : IDisposable
     {
-        readonly IBlocksGenerator _randomBlocksGenerator;
         readonly BlockEntity[,] _board;
-
-        readonly Transform _boardTransformParent;
         readonly uint _columnCount;
         readonly ICompacting _compacting;
         readonly GameLevelConfig _levelConfig;
         readonly IMatchPattern _matchPattern;
         readonly IPossibleMatchPattern _possibleMatchPattern;
 
+        readonly IBlocksGenerator _randomBlocksGenerator;
+
         readonly uint _rowCount;
 
         //rethink
         readonly ScoreController _scoreController;
 
+        GameBoardRect _boardRect;
+
         Pool<IBlockView, int> _pool = new();
 
         public GameBoardController(GameLevelConfig levelConfig,
-                                   uint rowCount,
-                                   uint columnCount,
-                                   Transform boardTransformParent)
+                                   GameBoardRect boardRect)
         {
             _levelConfig = levelConfig;
-            _rowCount = rowCount;
-            _columnCount = columnCount;
-            _boardTransformParent = boardTransformParent;
+            _rowCount = levelConfig.RowCount;
+            _columnCount = levelConfig.ColumnCount;
+            _boardRect = boardRect;
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new MatchSomeCountInHorizontalOrVerticalPattern();
             _scoreController = new ScoreController(levelConfig);
@@ -54,6 +53,29 @@ namespace Match3.GameCore
 
         public void Dispose()
         {
+            _boardRect = null;
+        }
+
+        public void CreateBoard()
+        {
+            _boardRect.SetRootLocalPosition(_levelConfig.OffsetRoot);
+
+            var startBlockPosition = _boardRect.GetLeftUpAnchorPosition() + (Vector3) _levelConfig.OffsetRoot;
+
+            for (var row = 0; row < _levelConfig.RowCount; row++)
+            {
+                var startPosition = startBlockPosition;
+                startPosition.y -= 1.33f * row;
+                for (var col = 0; col < _levelConfig.ColumnCount; col++)
+                {
+                    var index = (int) (row * _levelConfig.ColumnCount + col);
+                    var prefab = _levelConfig.Blocks[index].Prefab;
+
+                    CreateBlock(row, col, prefab, startPosition);
+
+                    startPosition.x += 1.27f;
+                }
+            }
         }
 
         GameObject GetBlockPrefabById(uint id)
@@ -69,13 +91,13 @@ namespace Match3.GameCore
             }
         }
 
-        public void CreateBlock(int rowIndex,
-                                int columnIndex,
-                                GameObject prefab,
-                                Vector3 position)
+        void CreateBlock(int rowIndex,
+                         int columnIndex,
+                         GameObject prefab,
+                         Vector3 position)
         {
             //pool
-            var blockGameObjectInstance = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity, _boardTransformParent);
+            var blockGameObjectInstance = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity, _boardRect.RootTransform);
             var blockUserInput = blockGameObjectInstance.GetComponent<IBlockUserInputEvent>();
             var blockView = blockGameObjectInstance.GetComponent<IBlockView>();
 
@@ -187,7 +209,7 @@ namespace Match3.GameCore
                     }
                     while (!hasPossibleMatches && tryCount-- > 0);
 
-                    Debug.Log("Has Possible Matches: " + hasPossibleMatches +(5-tryCount));
+                    Debug.Log("Has Possible Matches: " + hasPossibleMatches + (5 - tryCount));
 
                     AnimateNewBlocks(newBlocks);
 

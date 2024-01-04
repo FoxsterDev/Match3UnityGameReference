@@ -22,21 +22,33 @@ namespace Match3.UI
         [SerializeField]
         Image _goalStatusImage = default;
 
-       
-        public void SetMoves(uint moves)
+        void IGameLevelUI.ResetState()
+        {
+            _goalMovesCountLabel.enabled = false;
+            _goalTimeLabel.enabled = false;
+            _goalStatusImage.enabled = false;
+            _goalBlockCountLabel.enabled = false;
+        }
+
+        void IGameLevelUI.SetMoves(uint moves)
         {
             _goalMovesCountLabel.text = moves + " moves";
+            _goalMovesCountLabel.enabled = true;
         }
 
-        public void SetAvailableTime(uint seconds)
+         void IGameLevelUI.SetAvailableTime(uint seconds)
         {
             _goalTimeLabel.text = seconds + " sec";
+            _goalTimeLabel.enabled = true;
         }
 
-        public void SetBlockGoal(uint count, Sprite blockSprite)
+         void IGameLevelUI.SetBlockGoal(uint count, Sprite blockSprite)
         {
             _goalStatusImage.sprite = blockSprite;
             _goalBlockCountLabel.text = count.ToString();
+
+            _goalStatusImage.enabled = true;
+            _goalBlockCountLabel.enabled = true;
         }
     }
 }
