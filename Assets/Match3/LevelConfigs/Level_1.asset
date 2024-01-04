@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cae60401bbe4ed2bae2cdd1c45f435c, type: 3}
-  m_Name: Level_0
+  m_Name: Level_1
   m_EditorClassIdentifier: 
   _columnCount: 4
   _rowCount: 4
@@ -40,9 +40,10 @@ MonoBehaviour:
   _minBlockId: 1
   _maxBlockId: 5
   _offsetRoot: {x: 1, y: -1}
-  _moves: 10
   Goals:
   - rid: 7747119909403099148
+  - rid: 7747119909403099149
+  - rid: 7747119909403099150
   references:
     version: 2
     RefIds:
@@ -51,3 +52,11 @@ MonoBehaviour:
       data:
         Count: 5
         Id: 2
+    - rid: 7747119909403099149
+      type: {class: FinishLevelForTheLimitedMoves, ns: Match3.GameCore, asm: Match3.GameCore}
+      data:
+        Moves: 10
+    - rid: 7747119909403099150
+      type: {class: FinishLevelForTheLimitedTime, ns: Match3.GameCore, asm: Match3.GameCore}
+      data:
+        TimeInSeconds: 60

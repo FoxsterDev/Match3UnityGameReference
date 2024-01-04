@@ -66,5 +66,14 @@ namespace Match3.GameCore
             new FinishLevelForTheLimitedMoves{ Moves = 10},
             new FinishLevelForTheLimitedTime{ TimeInSeconds = 60}
         };
+        
+        //to refactor
+        public Sprite GetBlockSprite(uint id)
+        {
+            return AllowedBlocks.Find(a =>
+            {
+                return ((IBlockView) a).ID == id;
+            }).GetComponentInChildren<SpriteRenderer>().sprite;
+        }
     }
 }

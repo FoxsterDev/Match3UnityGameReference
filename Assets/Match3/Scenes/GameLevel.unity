@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 475173520}
   - component: {fileID: 475173523}
   m_Layer: 5
-  m_Name: UICanvas
+  m_Name: UICanvasOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   m_Layer: 6
-  m_Name: Game Level Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 1708903503}
   - component: {fileID: 1708903502}
   m_Layer: 0
-  m_Name: GameLevelController
+  m_Name: GameLevelEntryPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameUIBehaviour: {fileID: 475173523}
+  _boardRect: {fileID: 1796412062}
   _levelConfig: {fileID: 11400000, guid: 4418586b8a1e8469eae8c86b1d51e79e, type: 2}
 --- !u!4 &1708903503
 Transform:
@@ -1102,7 +1103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d083e8594e5b4608b6a574a1d5a89d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelConfig: {fileID: 11400000, guid: 4418586b8a1e8469eae8c86b1d51e79e, type: 2}
   _rectTransform: {fileID: 1796412061}
   _rootTransform: {fileID: 1209767830}
 --- !u!1 &1999158467
