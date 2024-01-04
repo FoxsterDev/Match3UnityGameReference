@@ -18,6 +18,11 @@ namespace Match3.GameCore
 
         IGameLevelUI UI => _gameUIBehaviour as IGameLevelUI;
 
+        void Awake()
+        {
+            UI.ResetState();
+        }
+
         void Start()
         {
             InitializeUI();
@@ -36,8 +41,6 @@ namespace Match3.GameCore
 
         void InitializeUI()
         {
-            UI.ResetState();
-
             foreach (var goal in _levelConfig.Goals)
             {
                 switch (goal)
