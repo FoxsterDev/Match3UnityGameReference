@@ -14,48 +14,24 @@ namespace Match3.GameCore
         [SerializeField]
         GameLevelConfig _levelConfig = default;
 
-        GameBoardController _boardController;
+        GameLevelController _gameLevelController;
 
         IGameLevelUI UI => _gameUIBehaviour as IGameLevelUI;
 
         void Awake()
         {
-            UI.ResetState();
+            _gameLevelController = new GameLevelController(UI, _levelConfig, _boardRect);
+            _gameLevelController.Initialize();
         }
 
         void Start()
         {
-            InitializeUI();
-
-            _boardController = new GameBoardController(
-                _levelConfig,
-                _boardRect);
-
-            _boardController.CreateBoard();
+            _gameLevelController.StartLevel();
         }
 
         void OnDestroy()
         {
-            _boardController?.Dispose();
-        }
-
-        void InitializeUI()
-        {
-            foreach (var goal in _levelConfig.Goals)
-            {
-                switch (goal)
-                {
-                    case FinishLevelForTheLimitedMoves mov:
-                        UI.SetMoves(mov.Moves);
-                        break;
-                    case FinishLevelForTheLimitedTime time:
-                        UI.SetAvailableTime(time.TimeInSeconds);
-                        break;
-                    case CollectWithId block:
-                        UI.SetBlockGoal(block.Count, _levelConfig.GetBlockSprite(block.Id));
-                        break;
-                }
-            }
+            _gameLevelController?.Dispose();
         }
     }
 }
