@@ -66,7 +66,19 @@ namespace Match3.GameCore
             new FinishLevelForTheLimitedMoves{ Moves = 10},
             new FinishLevelForTheLimitedTime{ TimeInSeconds = 60}
         };
-        
+
+        [ContextMenu("Add Time Based Goal")]
+        void AddTimeBasedGoal()
+        {
+            Goals.Add(new FinishLevelForTheLimitedTime{ TimeInSeconds = 30});
+        }
+
+        [ContextMenu("Add Moves Limited Goal")]
+        void AddMovesLimitedGoal()
+        {
+            Goals.Add(new FinishLevelForTheLimitedMoves{ Moves = 10});
+        }
+
         //to refactor
         public Sprite GetBlockSprite(uint id)
         {

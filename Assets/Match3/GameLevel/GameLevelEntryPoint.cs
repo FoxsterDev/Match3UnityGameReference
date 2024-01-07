@@ -20,7 +20,7 @@ namespace Match3.GameCore
 
         void Awake()
         {
-            _gameLevelController = new GameLevelController(UI, _levelConfig, _boardRect);
+            _gameLevelController = new GameLevelController(UI, _levelConfig, _boardRect, this);
             _gameLevelController.Initialize();
         }
 

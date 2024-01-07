@@ -29,23 +29,24 @@ namespace Match3.GameCore
 
         readonly uint _rowCount;
 
-        //rethink
-        readonly ScoreController _scoreController;
+   
 
         GameBoardRect _boardRect;
 
         Pool<IBlockView, int> _pool = new();
+        readonly IGameBoardConnector _externalConnector;
 
         public GameBoardController(GameLevelConfig levelConfig,
-                                   GameBoardRect boardRect)
+                                   GameBoardRect boardRect, IGameBoardConnector externalConnector)
         {
+            _externalConnector = externalConnector;
             _levelConfig = levelConfig;
             _rowCount = levelConfig.RowCount;
             _columnCount = levelConfig.ColumnCount;
             _boardRect = boardRect;
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new MatchSomeCountInHorizontalOrVerticalPattern();
-            _scoreController = new ScoreController(levelConfig);
+          
             _compacting = new GameBoardCompacting();
             _randomBlocksGenerator = new GameBoardBlocksGenerator(levelConfig);
             _possibleMatchPattern = new PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove();
@@ -166,6 +167,12 @@ namespace Match3.GameCore
 
         void OnMoveUserInputEvent(BlockEntity currentBlock, BlockMoveDirection direction)
         {
+            if (_externalConnector.IsBlockMovementEligible(out var errorReason) == false)
+            {
+                Debug.LogWarning("Not IsBlockMovementEligible "+ errorReason);
+                return;
+            }
+
             var isMoveAllowed = IsMoveAllowed(
                 _rowCount,
                 _columnCount, currentBlock, direction,
@@ -176,6 +183,8 @@ namespace Match3.GameCore
 
             if (isMoveAllowed)
             {
+                _externalConnector.InitiatedBlockMovementEvent();
+
                 var targetBlock = _board[rowIndexNew, columnIndexNew];
                 //update board
                 _board[rowIndexNew, columnIndexNew] = currentBlock;
@@ -194,7 +203,8 @@ namespace Match3.GameCore
                 if (hasMatch)
                 {
                     AnimateMatches(matchesInTheRow, matchesInTheColumn);
-                    _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
+
+                    _externalConnector.BlockMatchesEvent(matchesInTheRow, matchesInTheColumn);
 
                     _compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard1);
                     AnimateCompacting(shifts);

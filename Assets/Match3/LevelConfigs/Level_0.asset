@@ -43,6 +43,8 @@ MonoBehaviour:
   _moves: 10
   Goals:
   - rid: 7747119909403099148
+  - rid: 7747119909403099157
+  - rid: 7747119909403099158
   references:
     version: 2
     RefIds:
@@ -51,3 +53,11 @@ MonoBehaviour:
       data:
         Count: 5
         Id: 2
+    - rid: 7747119909403099157
+      type: {class: FinishLevelForTheLimitedTime, ns: Match3.GameCore, asm: Match3.GameCore}
+      data:
+        TimeInSeconds: 30
+    - rid: 7747119909403099158
+      type: {class: FinishLevelForTheLimitedMoves, ns: Match3.GameCore, asm: Match3.GameCore}
+      data:
+        Moves: 10

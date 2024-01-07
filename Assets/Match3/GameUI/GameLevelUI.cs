@@ -32,7 +32,7 @@ namespace Match3.UI
 
         void IGameLevelUI.SetMoves(uint moves)
         {
-            _goalMovesCountLabel.text = moves + " moves";
+            _goalMovesCountLabel.text = moves.ToString();// + " moves";
             _goalMovesCountLabel.enabled = true;
         }
 
