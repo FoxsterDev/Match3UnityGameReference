@@ -195,6 +195,21 @@ namespace Match3.GameCore
 
             if (isMoveAllowed)
             {
+               var tempBoard = _board.ConvertToIntMatrix();
+               var targetBlockID = tempBoard[rowIndexNew, columnIndexNew];
+               //update board
+               tempBoard[rowIndexNew, columnIndexNew] = currentBlock.ID;
+               tempBoard[currentBlock.RowIndex, currentBlock.ColumnIndex] = targetBlockID;
+               
+               var hasMatchCheck = _matchPattern.IsMatched(
+                   tempBoard,
+                   out var matchesInTheRow2,
+                   out var matchesInTheColumn2,
+                   BlockEntity.EMPTY_ID);
+
+               if(!hasMatchCheck) return;
+
+               
                 _externalConnector.InitiatedBlockMovementEvent();
 
                 var targetBlock = _board[rowIndexNew, columnIndexNew];
@@ -206,6 +221,7 @@ namespace Match3.GameCore
                 currentBlock.SwapWith(targetBlock);
 
                 Repeat:
+
                 var hasMatch = _matchPattern.IsMatched(
                     _board.ConvertToIntMatrix(),
                     out var matchesInTheRow,

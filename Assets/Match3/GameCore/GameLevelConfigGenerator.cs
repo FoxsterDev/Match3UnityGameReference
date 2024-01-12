@@ -89,7 +89,7 @@ namespace Match3.GameCore
                                (uint)columnCount, 
                                blocks, 
                                _levelTemplateConfig.MinBlockId, 
-                               _levelTemplateConfig.MaxBlockId, new Vector2(1f - rowCount*0.16f, -1f));
+                               _levelTemplateConfig.MaxBlockId, new Vector2(1f - columnCount*0.1f, -1f));
             return levelConfig;
         }
     }

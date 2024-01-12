@@ -60,7 +60,7 @@ namespace Match3.GameCore
             {
                 if (_availableTime != value)
                 {
-                    if (_availableTime > 0 && value == 0)
+                    if (_availableTime > 0 && value == 0 && !_isBlockMovement)
                     {
                         FinishLevel();
                     }
@@ -92,13 +92,16 @@ namespace Match3.GameCore
             return AvailableMoves > 0;
         }
 
+        bool _isBlockMovement;
         void IGameBoardConnector.InitiatedBlockMovementEvent()
         {
             AvailableMoves -= 1;
+            _isBlockMovement = true;
         }
 
         void IGameBoardConnector.FinishedBlockMovementEvent()
         {
+            _isBlockMovement = false; 
             if (AvailableMoves == 0 || IsAllGoalsReached() || _availableTime < 1)
             {
                 FinishLevel();

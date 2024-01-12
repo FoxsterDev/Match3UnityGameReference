@@ -43,6 +43,7 @@ namespace Match3.GameCore
             _minBlockId = minBlockId;
             _maxBlockId = maxBlockId;
             _blocks = blocks;
+            _offsetRoot = offsetRoot;
         }
 
         public uint ColumnCount => _columnCount;
