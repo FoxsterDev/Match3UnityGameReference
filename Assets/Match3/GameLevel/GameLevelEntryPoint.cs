@@ -14,24 +14,26 @@ namespace Match3.GameCore
         [SerializeField]
         GameLevelConfig _levelConfig = default;
 
-        GameLevelController _gameLevelController;
+        [SerializeField]
+        GameLevelTemplateConfig _levelTemplateConfig = default;
+
+        GameLevelPlayerStartChoiceController _gameLevelPlayerStartChoiceController;
 
         IGameLevelUI UI => _gameUIBehaviour as IGameLevelUI;
 
         void Awake()
         {
-            _gameLevelController = new GameLevelController(UI, _levelConfig, _boardRect, this);
-            _gameLevelController.Initialize();
+            _gameLevelPlayerStartChoiceController = new GameLevelPlayerStartChoiceController(UI, _levelConfig, _levelTemplateConfig, _boardRect, this);
         }
 
         void Start()
         {
-            _gameLevelController.StartLevel();
+            _gameLevelPlayerStartChoiceController.Start();
         }
 
         void OnDestroy()
         {
-            _gameLevelController?.Dispose();
+            _gameLevelPlayerStartChoiceController?.Stop();
         }
     }
 }

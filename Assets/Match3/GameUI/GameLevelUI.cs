@@ -22,6 +22,11 @@ namespace Match3.UI
         [SerializeField]
         Image _goalStatusImage = default;
 
+        [SerializeField]
+        MonoBehaviour _gameLevelFinishUIBehaviour;
+        [SerializeField]
+        MonoBehaviour _gameLevelStartUIBehaviour;
+
         void IGameLevelUI.ResetState()
         {
             _goalMovesCountLabel.enabled = false;
@@ -32,7 +37,7 @@ namespace Match3.UI
 
         void IGameLevelUI.SetMoves(uint moves)
         {
-            _goalMovesCountLabel.text = moves.ToString();// + " moves";
+            _goalMovesCountLabel.text = moves.ToString() + " moves";
             _goalMovesCountLabel.enabled = true;
         }
 
@@ -50,5 +55,8 @@ namespace Match3.UI
             _goalStatusImage.enabled = true;
             _goalBlockCountLabel.enabled = true;
         }
+
+         public IGameLevelFinishUI FinishUI => (IGameLevelFinishUI) _gameLevelFinishUIBehaviour;
+         public IGameLevelStartUI StartUI => (IGameLevelStartUI) _gameLevelStartUIBehaviour;
     }
 }

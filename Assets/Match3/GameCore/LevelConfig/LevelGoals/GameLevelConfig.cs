@@ -51,13 +51,8 @@ namespace Match3.GameCore
 
         public Vector2 OffsetRoot => _offsetRoot;
 
-        public uint Moves => _moves;
-
         [SerializeField]
         Vector2 _offsetRoot = new Vector2(1.0f, -1.0f);
-
-        [SerializeField]
-        uint _moves = 10;
 
         [SerializeReference] //https://blog.unity.com/engine-platform/serializereference-improvements-in-unity-2021-lts
         public List<ILevelGoal> Goals = new List<ILevelGoal>

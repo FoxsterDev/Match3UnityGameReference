@@ -37,7 +37,8 @@ namespace Match3.GameCore
         readonly IGameBoardConnector _externalConnector;
 
         public GameBoardController(GameLevelConfig levelConfig,
-                                   GameBoardRect boardRect, IGameBoardConnector externalConnector)
+                                   GameBoardRect boardRect, 
+                                   IGameBoardConnector externalConnector)
         {
             _externalConnector = externalConnector;
             _levelConfig = levelConfig;
@@ -57,6 +58,11 @@ namespace Match3.GameCore
             _boardRect = null;
         }
 
+        public void Stop()
+        {
+            Dispose();
+        }
+        
         public void CreateBoard()
         {
             _boardRect.SetRootLocalPosition(_levelConfig.OffsetRoot);
