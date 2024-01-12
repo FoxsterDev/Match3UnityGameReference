@@ -7,58 +7,52 @@ namespace Match3.UI
 {
     public class GameLevelFinishUI : MonoBehaviour, IGameLevelFinishUI
     {
-        [SerializeField] private Button _randomPlayButton;
-        [SerializeField] private Button _replayPlayButton;
-        [SerializeField] private TMP_Text _descriptionLabel;
+        [SerializeField]
+        Button _randomPlayButton;
 
-         void ResetState()
-         {
-             _descriptionLabel.text = string.Empty;
-         }
+        [SerializeField]
+        Button _replayPlayButton;
 
-         void IGameLevelFinishUI.Show(string text)
-         {
-             ResetState();
-             SetDescription(text);
+        [SerializeField]
+        TMP_Text _descriptionLabel;
+
+        void IGameLevelFinishUI.Show(string text)
+        {
+            ResetState();
+            SetDescription(text);
+            SetActive(true);
         }
 
-         void IGameLevelFinishUI.Hide()
+        void IGameLevelFinishUI.Hide()
         {
             SetActive(false);
         }
 
-         void SetDescription(string text)
+        event UnityAction IGameLevelFinishUI.ReplayButtonClick
+        {
+            add => _replayPlayButton.onClick.AddListener(value);
+            remove => _replayPlayButton.onClick.RemoveAllListeners();
+        }
+
+        event UnityAction IGameLevelFinishUI.RandomPlayButtonClick
+        {
+            add => _randomPlayButton.onClick.AddListener(value);
+            remove => _randomPlayButton.onClick.RemoveAllListeners();
+        }
+
+        void ResetState()
+        {
+            _descriptionLabel.text = string.Empty;
+        }
+
+        void SetDescription(string text)
         {
             _descriptionLabel.text = text;
         }
 
-         void SetActive(bool active)
+        void SetActive(bool active)
         {
             gameObject.SetActive(active);
-        }
-
-        event UnityAction IGameLevelFinishUI.ReplayButtonClick
-        {
-            add
-            {
-                _replayPlayButton.onClick.AddListener(value);
-            }
-            remove
-            {
-                _replayPlayButton.onClick.RemoveAllListeners();
-            }
-        }
-
-        event UnityAction IGameLevelFinishUI.RandomPlayButtonClick 
-        {
-            add
-            {
-                _randomPlayButton.onClick.AddListener(value);
-            }
-            remove
-            {
-                _randomPlayButton.onClick.RemoveAllListeners();
-            }
         }
     }
 }

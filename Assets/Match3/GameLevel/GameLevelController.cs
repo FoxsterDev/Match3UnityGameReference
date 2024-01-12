@@ -11,6 +11,7 @@ namespace Match3.GameCore
     public class GameLevelController : IGameBoardConnector, IDisposable
     {
         readonly GameBoardRect _boardRect;
+        readonly IGameLevelPlayResultConnector _levelPlayResultConnector;
         readonly MonoBehaviour _coroutineRunner;
 
         readonly Dictionary<uint, uint> _goals = new(1);
@@ -26,11 +27,13 @@ namespace Match3.GameCore
         //state
         Coroutine _timerCoroutine;
 
-        public GameLevelController(IGameLevelUI ui,
+        public GameLevelController(IGameLevelPlayResultConnector levelPlayResultConnector, 
+                                   IGameLevelUI ui,
                                    GameLevelConfig levelConfig,
                                    GameBoardRect boardRect,
                                    MonoBehaviour coroutineRunner)
         {
+            _levelPlayResultConnector = levelPlayResultConnector;
             _coroutineRunner = coroutineRunner;
             _boardRect = boardRect;
             _levelConfig = levelConfig;
@@ -46,6 +49,7 @@ namespace Match3.GameCore
                 {
                     _availableMoves = value;
                     _ui.SetMoves(value);
+                   
                 }
             }
         }
@@ -60,16 +64,11 @@ namespace Match3.GameCore
                     _availableTime = value;
                     _ui.SetAvailableTime(value);
 
-                    if (_availableTime == 0)
-                    {
-                        //_timerCoroutine = null;
-                        FinishLevel();
-                    }
                 }
             }
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
         }
 
@@ -94,7 +93,12 @@ namespace Match3.GameCore
         void IGameBoardConnector.InitiatedBlockMovementEvent()
         {
             AvailableMoves -= 1;
-            if (AvailableMoves == 0)
+        }
+
+        void IGameBoardConnector.FinishedBlockMovementEvent()
+        {
+            
+            if (AvailableMoves == 0 || IsAllGoalsReached() || _availableTime < 1)
             {
                 FinishLevel();
             }
@@ -116,16 +120,12 @@ namespace Match3.GameCore
                 UpdateGoal(e[0].id, (uint) e.Count);
             }
 
-            if (IsAllGoalsReached())
-            {
-                FinishLevel();
-            }
         }
 
         public void Stop()
         {
-            _boardController?.Dispose();
-            Dispose();
+            _boardController?.Stop();
+            ((IDisposable) this).Dispose();
         }
 
         public void Start()
@@ -152,6 +152,7 @@ namespace Match3.GameCore
 
         void FinishLevel()
         {
+            Debug.Log(nameof(FinishLevel));
             _isLevelFinished = true;
             //block all inputs
             //show finish window panel
@@ -161,7 +162,7 @@ namespace Match3.GameCore
                 _timerCoroutine = null;
             }
 
-            _ui.FinishUI.Show($"You finished the level\n Your score is {UnityEngine.Random.Range(100, 1000)}");
+            _levelPlayResultConnector.FinishedLevelEvent((uint)UnityEngine.Random.Range(100, 1000));
         }
 
         IEnumerator StartTimer(uint delay) //check resume

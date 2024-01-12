@@ -29,15 +29,13 @@ namespace Match3.GameCore
 
         readonly uint _rowCount;
 
-   
-
         GameBoardRect _boardRect;
 
         Pool<IBlockView, int> _pool = new();
         readonly IGameBoardConnector _externalConnector;
 
         public GameBoardController(GameLevelConfig levelConfig,
-                                   GameBoardRect boardRect, 
+                                   GameBoardRect boardRect,
                                    IGameBoardConnector externalConnector)
         {
             _externalConnector = externalConnector;
@@ -47,22 +45,30 @@ namespace Match3.GameCore
             _boardRect = boardRect;
             _board = new BlockEntity[_rowCount, _columnCount];
             _matchPattern = new MatchSomeCountInHorizontalOrVerticalPattern();
-          
+
             _compacting = new GameBoardCompacting();
             _randomBlocksGenerator = new GameBoardBlocksGenerator(levelConfig);
             _possibleMatchPattern = new PossibleMatch3PatternInHorizontalOrVerticalForTheOneMove();
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
+            for (var row = 0; row < _rowCount; row++)
+            {
+                for (var col = 0; col < _columnCount; col++)
+                {
+                    DestroyBlock(_board[row, col]);
+                    _board[row, col] = null;
+                }
+            }
             _boardRect = null;
         }
 
         public void Stop()
         {
-            Dispose();
+            ((IDisposable) this).Dispose();
         }
-        
+
         public void CreateBoard()
         {
             _boardRect.SetRootLocalPosition(_levelConfig.OffsetRoot);
@@ -125,7 +131,7 @@ namespace Match3.GameCore
         {
             //_pool.Release(entity.View);
             //entity.UserInput.OnMove -= onMoveCallback;
-            entity.Destroy();
+            entity?.Destroy();
         }
 
         void AnimateNewBlocks(List<(int row, int column, uint id)> blocks)
@@ -241,6 +247,8 @@ namespace Match3.GameCore
                     //_compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard3);
                     //AnimateCompacting(shifts);
                 }
+
+                _externalConnector.FinishedBlockMovementEvent();
             }
         }
 

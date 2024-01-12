@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace Match3.GameCore
 {
     public class BlockUserEventTrigger : EventTrigger, IBlockUserInputEvent
     {
-        public event Action<BlockMoveDirection> OnMove
+        public event UnityAction<BlockMoveDirection> OnMove
         {
             add => _onMove += value;
             remove => _onMove -= value;
@@ -18,15 +19,12 @@ namespace Match3.GameCore
             {
                 foreach (var del in _onMove.GetInvocationList())
                 {
-                    _onMove -= (Action<BlockMoveDirection>) del;
+                    _onMove -= (UnityAction<BlockMoveDirection>) del;
                 }
-
-                var lentgh = _onMove?.GetInvocationList().Length ?? 0;
-                Debug.Log(name + ",InvocationList " + lentgh);
             }
         }
 
-        event Action<BlockMoveDirection> _onMove;
+        event UnityAction<BlockMoveDirection> _onMove;
 
         public override void OnBeginDrag(PointerEventData eventData)
         {

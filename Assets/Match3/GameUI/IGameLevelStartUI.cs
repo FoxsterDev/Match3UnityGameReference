@@ -2,7 +2,7 @@ using UnityEngine.Events;
 
 namespace Match3.UI
 {
-    public interface IGameLevelStartUI 
+    public interface IGameLevelStartUI
     {
         void Show(string previousBestScore);
         void Hide();

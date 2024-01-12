@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Match3.GameCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +20,7 @@ namespace Match3.UI
 
         [SerializeField]
         MonoBehaviour _gameLevelFinishUIBehaviour;
+
         [SerializeField]
         MonoBehaviour _gameLevelStartUIBehaviour;
 
@@ -41,13 +38,13 @@ namespace Match3.UI
             _goalMovesCountLabel.enabled = true;
         }
 
-         void IGameLevelUI.SetAvailableTime(uint seconds)
+        void IGameLevelUI.SetAvailableTime(uint seconds)
         {
             _goalTimeLabel.text = seconds + " sec";
             _goalTimeLabel.enabled = true;
         }
 
-         void IGameLevelUI.SetBlockGoal(uint count, Sprite blockSprite)
+        void IGameLevelUI.SetBlockGoal(uint count, Sprite blockSprite)
         {
             _goalStatusImage.sprite = blockSprite;
             _goalBlockCountLabel.text = count.ToString();
@@ -56,7 +53,7 @@ namespace Match3.UI
             _goalBlockCountLabel.enabled = true;
         }
 
-         public IGameLevelFinishUI FinishUI => (IGameLevelFinishUI) _gameLevelFinishUIBehaviour;
-         public IGameLevelStartUI StartUI => (IGameLevelStartUI) _gameLevelStartUIBehaviour;
+        public IGameLevelFinishUI FinishUI => (IGameLevelFinishUI) _gameLevelFinishUIBehaviour;
+        public IGameLevelStartUI StartUI => (IGameLevelStartUI) _gameLevelStartUIBehaviour;
     }
 }

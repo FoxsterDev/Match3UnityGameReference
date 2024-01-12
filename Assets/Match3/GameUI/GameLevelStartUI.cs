@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,10 +7,14 @@ namespace Match3.UI
 {
     public class GameLevelStartUI : MonoBehaviour, IGameLevelStartUI
     {
-        [SerializeField] private Button _randomPlayButton;
-        [SerializeField] private Button _playButton;
-        [SerializeField] private TMP_Text _descriptionLabel;
+        [SerializeField]
+        Button _randomPlayButton;
 
+        [SerializeField]
+        Button _playButton;
+
+        [SerializeField]
+        TMP_Text _descriptionLabel;
 
         void IGameLevelStartUI.Show(string previousBestScore)
         {
@@ -24,16 +27,6 @@ namespace Match3.UI
             SetActive(false);
         }
 
-        void SetDescription(string text)
-        {
-            _descriptionLabel.text = text;
-        }
-        
-        void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
-        }
-
         event UnityAction IGameLevelStartUI.PlayButtonClick
         {
             add => _playButton.onClick.AddListener(value);
@@ -44,6 +37,16 @@ namespace Match3.UI
         {
             add => _randomPlayButton.onClick.AddListener(value);
             remove => _randomPlayButton.onClick.RemoveListener(value);
+        }
+
+        void SetDescription(string text)
+        {
+            _descriptionLabel.text = text;
+        }
+
+        void SetActive(bool active)
+        {
+            gameObject.SetActive(active);
         }
     }
 }

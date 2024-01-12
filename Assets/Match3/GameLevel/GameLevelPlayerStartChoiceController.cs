@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Match3.UI
 {
-    public class GameLevelPlayerStartChoiceController : IDisposable
+    public class GameLevelPlayerStartChoiceController : IGameLevelPlayResultConnector, IDisposable
     {
         readonly GameBoardRect _boardRect;
         readonly MonoBehaviour _coroutineRunner;
@@ -41,24 +41,58 @@ namespace Match3.UI
         {
             _ui.StartUI.PlayButtonClick -= OnPlayButtonClick;
             _ui.StartUI.RandomPlayButtonClick -= OnRandomPlayButtonClick;
+
+            _ui.FinishUI.RandomPlayButtonClick -= FinishUI_OnRandomPlayButtonClick;
+            _ui.FinishUI.ReplayButtonClick -= OnReplayButtonClick;
             ((IDisposable) this).Dispose();
         }
 
         void OnRandomPlayButtonClick()
         {
+            _ui.StartUI.Hide();
             var template = _levelTemplateConfig;
         }
 
         void OnPlayButtonClick()
         {
             _ui.StartUI.Hide();
-            _levelController = new GameLevelController(
+            _levelController = new GameLevelController(this,
                 _ui,
                 _regularLevelConfig,
                 _boardRect,
                 _coroutineRunner);
+
             _levelController.Start();
-            //StartLevel();
+        }
+
+        void IGameLevelPlayResultConnector.FinishedLevelEvent(uint score)
+        {
+            _ui.FinishUI.Show($"You finished the level\n Your score is {score}");
+            _ui.FinishUI.RandomPlayButtonClick += FinishUI_OnRandomPlayButtonClick;
+            _ui.FinishUI.ReplayButtonClick += OnReplayButtonClick;
+            _levelController?.Stop();
+            _levelController = null;
+        }
+        
+        void OnReplayButtonClick()
+        {
+            
+            //_levelController?.Stop();
+            //_levelController = null;
+            
+            _ui.FinishUI.Hide();
+            _levelController = new GameLevelController(this,
+                                                       _ui,
+                                                       _regularLevelConfig,
+                                                       _boardRect,
+                                                       _coroutineRunner);
+
+            _levelController.Start();
+        }
+        void FinishUI_OnRandomPlayButtonClick()
+        {
+            _ui.FinishUI.Hide();
+            OnRandomPlayButtonClick();
         }
     }
 }

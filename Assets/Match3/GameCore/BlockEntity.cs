@@ -74,12 +74,16 @@ namespace Match3.GameCore
 
         public void Destroy()
         {
-            var gameObject = ((MonoBehaviour) View).gameObject;
-            Object.Destroy(gameObject);
-            UserInput.Dispose();
-            View.Dispose();
+            UserInput?.Dispose();
             UserInput = null;
-            View = null;
+
+            if (View is MonoBehaviour view)
+            {
+                var gameObject = view.gameObject;
+                Object.Destroy(gameObject);
+                View.Dispose();
+                View = null;
+            }
         }
 
         public override string ToString()
