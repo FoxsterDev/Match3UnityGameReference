@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -32,6 +33,17 @@ namespace Match3.GameCore
         [SerializeField]
         [Range(2, 5)]
         uint _maxBlockId = 5;
+
+        public void Modify(uint rowCount,
+                           uint columnCount,
+                           List<BlockConfig> blocks, uint minBlockId, uint maxBlockId, Vector2 offsetRoot)
+        {
+            _rowCount = rowCount;
+            _columnCount = columnCount;
+            _minBlockId = minBlockId;
+            _maxBlockId = maxBlockId;
+            _blocks = blocks;
+        }
 
         public uint ColumnCount => _columnCount;
 

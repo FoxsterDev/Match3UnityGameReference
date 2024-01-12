@@ -12,6 +12,10 @@ namespace Match3.GameCore
         [SerializeField]
         GameObject _prefab = null;
 
+        public BlockConfig(GameObject prefab)
+        {
+            _prefab = prefab;
+        }
         /// <summary>
         /// it should be a weak reference for object from a resource mediator
         /// </summary>

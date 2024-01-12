@@ -60,6 +60,10 @@ namespace Match3.GameCore
             {
                 if (_availableTime != value)
                 {
+                    if (_availableTime > 0 && value == 0)
+                    {
+                        FinishLevel();
+                    }
                     _availableTime = value;
                     _ui.SetAvailableTime(value);
                 }

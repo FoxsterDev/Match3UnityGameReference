@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LevelTemplate
   m_EditorClassIdentifier: 
   _minColumnCount: 3
-  _maxColumnCount: 10
-  _minRowCount: 4
-  _maxRowCount: 10
+  _maxColumnCount: 6
+  _minRowCount: 3
+  _maxRowCount: 6
   _allowedBlocks:
   - {fileID: -1620043716659338019, guid: 6b590f380bd5840868863d4058bda4dd, type: 3}
   - {fileID: -6949656132756755778, guid: fe81b9c6cab9b46c68cc26cd76efeedc, type: 3}

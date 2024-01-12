@@ -33,21 +33,20 @@ namespace Match3.GameCore
         [SerializeField]
         Vector2 _offsetRoot = new Vector2(1.0f, -1.0f);
 
-        public GameLevelConfig GenerateRandom()
-        {
-            var column = Random.Range(_minColumnCount, _maxColumnCount + 1);
-            var row = Random.Range(_minRowCount, _maxRowCount + 1);
+        public uint MinColumnCount => _minColumnCount;
 
-            var count = (int) (column * row);
-            var blocks = new List<BlockView>(count);
-            while (count-- > 0)
-            {
-                var randomIndex = Random.Range(0, _allowedBlocks.Count);
-                blocks.Add(_allowedBlocks[randomIndex]);
-            }
+        public uint MaxColumnCount => _maxColumnCount;
 
-            var levelConfig = ScriptableObject.CreateInstance<GameLevelConfig>();
-            return levelConfig;
-        }
+        public uint MinRowCount => _minRowCount;
+
+        public uint MaxRowCount => _maxRowCount;
+
+        public List<BlockView> AllowedBlocks => _allowedBlocks;
+
+        public uint MinBlockId => _minBlockId;
+
+        public uint MaxBlockId => _maxBlockId;
+
+        public Vector2 OffsetRoot => _offsetRoot;
     }
 }

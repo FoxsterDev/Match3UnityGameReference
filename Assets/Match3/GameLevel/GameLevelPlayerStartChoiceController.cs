@@ -32,15 +32,19 @@ namespace Match3.UI
 
         void IGameLevelPlayResultConnector.FinishedLevelEvent(uint score)
         {
+            TheBestScoreUpdate(score);
             _ui.FinishUI.Show($"You finished the level\n Your score is {score}");
-            _ui.FinishUI.RandomPlayButtonClick += FinishUI_OnRandomPlayButtonClick;
-            _ui.FinishUI.ReplayButtonClick += OnReplayButtonClick;
+          
             _levelController?.Stop();
             _levelController = null;
+        }
+
+        void TheBestScoreUpdate(uint score)
+        {
             var prevScore = PlayerPrefs.GetInt("TheBestScore", 0);
             if (score > prevScore)
             {
-                PlayerPrefs.SetInt("TheBestScore", (int)score);
+                PlayerPrefs.SetInt("TheBestScore", (int) score);
                 PlayerPrefs.Save();
             }
         }
@@ -49,24 +53,44 @@ namespace Match3.UI
         {
             _ui.ResetState();
             _ui.StartUI.Show(PlayerPrefs.GetInt("TheBestScore", 0).ToString());
+
             _ui.StartUI.PlayButtonClick += OnPlayButtonClick;
-            _ui.StartUI.RandomPlayButtonClick += OnRandomPlayButtonClick;
+            _ui.StartUI.RandomPlayButtonClick += StartUI_OnRandomPlayButtonClick;
+
+            _ui.FinishUI.RandomPlayButtonClick += FinishUI_OnRandomPlayButtonClick;
+            _ui.FinishUI.ReplayButtonClick += OnReplayButtonClick;
         }
 
         public void Stop()
         {
             _ui.StartUI.PlayButtonClick -= OnPlayButtonClick;
-            _ui.StartUI.RandomPlayButtonClick -= OnRandomPlayButtonClick;
+            _ui.StartUI.RandomPlayButtonClick -= StartUI_OnRandomPlayButtonClick;
 
             _ui.FinishUI.RandomPlayButtonClick -= FinishUI_OnRandomPlayButtonClick;
             _ui.FinishUI.ReplayButtonClick -= OnReplayButtonClick;
             ((IDisposable) this).Dispose();
         }
 
-        void OnRandomPlayButtonClick()
+        void StartUI_OnRandomPlayButtonClick()
         {
             _ui.StartUI.Hide();
-            var template = _levelTemplateConfig;
+            var gen = new GameLevelConfigGenerator(_levelTemplateConfig);
+            var levelConfig = gen.Generate(_regularLevelConfig);
+            if (levelConfig != null)
+            {
+                _levelController = new GameLevelController(
+                    this,
+                    _ui,
+                    levelConfig,
+                    _boardRect,
+                    _coroutineRunner);
+
+                _levelController.Start();
+            }
+            else
+            {
+                Debug.LogWarning("The level config was not generated. Try again");
+            }
         }
 
         void OnPlayButtonClick()
@@ -98,7 +122,7 @@ namespace Match3.UI
         void FinishUI_OnRandomPlayButtonClick()
         {
             _ui.FinishUI.Hide();
-            OnRandomPlayButtonClick();
+            StartUI_OnRandomPlayButtonClick();
         }
     }
 }

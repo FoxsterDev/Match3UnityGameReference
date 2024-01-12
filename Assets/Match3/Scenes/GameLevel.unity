@@ -2761,7 +2761,7 @@ MonoBehaviour:
   _gameUIBehaviour: {fileID: 475173523}
   _boardRect: {fileID: 1796412062}
   _levelConfig: {fileID: 11400000, guid: 4418586b8a1e8469eae8c86b1d51e79e, type: 2}
-  _levelTemplateConfig: {fileID: 0}
+  _levelTemplateConfig: {fileID: 11400000, guid: 549973a3256474ae6a98673014c9d0b0, type: 2}
 --- !u!4 &1708903503
 Transform:
   m_ObjectHideFlags: 0
