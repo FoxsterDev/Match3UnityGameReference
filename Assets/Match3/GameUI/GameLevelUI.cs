@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,9 @@ namespace Match3.UI
         [SerializeField]
         TMP_Text _goalMovesCountLabel = default;
 
+        [SerializeField]
+        TMP_Text _scoreLabel = default;
+        
         [SerializeField]
         TMP_Text _goalTimeLabel = default;
 
@@ -30,6 +34,7 @@ namespace Match3.UI
             _goalTimeLabel.enabled = false;
             _goalStatusImage.enabled = false;
             _goalBlockCountLabel.enabled = false;
+            _scoreLabel.enabled = false;
         }
 
         void IGameLevelUI.SetMoves(uint moves)
@@ -42,6 +47,12 @@ namespace Match3.UI
         {
             _goalTimeLabel.text = seconds + " sec";
             _goalTimeLabel.enabled = true;
+        }
+
+         void IGameLevelUI.SetScore(uint score)
+        {
+            _scoreLabel.text = score + " score";
+            _scoreLabel.enabled = true;
         }
 
         void IGameLevelUI.SetBlockGoal(uint count, Sprite blockSprite)

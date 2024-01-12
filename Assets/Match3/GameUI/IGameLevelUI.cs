@@ -9,6 +9,7 @@ namespace Match3.UI
         void ResetState();
         void SetMoves(uint moves);
         void SetAvailableTime(uint seconds);
+        void SetScore(uint score);
         void SetBlockGoal(uint count, Sprite blockSprite);
     }
 }

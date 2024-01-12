@@ -30,9 +30,25 @@ namespace Match3.UI
         {
         }
 
+        void IGameLevelPlayResultConnector.FinishedLevelEvent(uint score)
+        {
+            _ui.FinishUI.Show($"You finished the level\n Your score is {score}");
+            _ui.FinishUI.RandomPlayButtonClick += FinishUI_OnRandomPlayButtonClick;
+            _ui.FinishUI.ReplayButtonClick += OnReplayButtonClick;
+            _levelController?.Stop();
+            _levelController = null;
+            var prevScore = PlayerPrefs.GetInt("TheBestScore", 0);
+            if (score > prevScore)
+            {
+                PlayerPrefs.SetInt("TheBestScore", (int)score);
+                PlayerPrefs.Save();
+            }
+        }
+
         public void Start()
         {
-            _ui.StartUI.Show("1240");
+            _ui.ResetState();
+            _ui.StartUI.Show(PlayerPrefs.GetInt("TheBestScore", 0).ToString());
             _ui.StartUI.PlayButtonClick += OnPlayButtonClick;
             _ui.StartUI.RandomPlayButtonClick += OnRandomPlayButtonClick;
         }
@@ -56,7 +72,8 @@ namespace Match3.UI
         void OnPlayButtonClick()
         {
             _ui.StartUI.Hide();
-            _levelController = new GameLevelController(this,
+            _levelController = new GameLevelController(
+                this,
                 _ui,
                 _regularLevelConfig,
                 _boardRect,
@@ -65,30 +82,19 @@ namespace Match3.UI
             _levelController.Start();
         }
 
-        void IGameLevelPlayResultConnector.FinishedLevelEvent(uint score)
-        {
-            _ui.FinishUI.Show($"You finished the level\n Your score is {score}");
-            _ui.FinishUI.RandomPlayButtonClick += FinishUI_OnRandomPlayButtonClick;
-            _ui.FinishUI.ReplayButtonClick += OnReplayButtonClick;
-            _levelController?.Stop();
-            _levelController = null;
-        }
-        
         void OnReplayButtonClick()
         {
-            
-            //_levelController?.Stop();
-            //_levelController = null;
-            
             _ui.FinishUI.Hide();
-            _levelController = new GameLevelController(this,
-                                                       _ui,
-                                                       _regularLevelConfig,
-                                                       _boardRect,
-                                                       _coroutineRunner);
+            _levelController = new GameLevelController(
+                this,
+                _ui,
+                _regularLevelConfig,
+                _boardRect,
+                _coroutineRunner);
 
             _levelController.Start();
         }
+
         void FinishUI_OnRandomPlayButtonClick()
         {
             _ui.FinishUI.Hide();

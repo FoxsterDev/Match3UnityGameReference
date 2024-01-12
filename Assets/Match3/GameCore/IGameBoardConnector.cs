@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace Match3.GameCore
 {
-   
     public interface IGameBoardConnector
     {
         bool IsBlockMovementEligible(out string errorReason);

@@ -11,11 +11,11 @@ namespace Match3.GameCore
     public class GameLevelController : IGameBoardConnector, IDisposable
     {
         readonly GameBoardRect _boardRect;
-        readonly IGameLevelPlayResultConnector _levelPlayResultConnector;
         readonly MonoBehaviour _coroutineRunner;
 
         readonly Dictionary<uint, uint> _goals = new(1);
         readonly GameLevelConfig _levelConfig;
+        readonly IGameLevelPlayResultConnector _levelPlayResultConnector;
         readonly IGameLevelUI _ui;
         uint _availableMoves, _availableTime;
         GameBoardController _boardController;
@@ -27,7 +27,7 @@ namespace Match3.GameCore
         //state
         Coroutine _timerCoroutine;
 
-        public GameLevelController(IGameLevelPlayResultConnector levelPlayResultConnector, 
+        public GameLevelController(IGameLevelPlayResultConnector levelPlayResultConnector,
                                    IGameLevelUI ui,
                                    GameLevelConfig levelConfig,
                                    GameBoardRect boardRect,
@@ -49,7 +49,6 @@ namespace Match3.GameCore
                 {
                     _availableMoves = value;
                     _ui.SetMoves(value);
-                   
                 }
             }
         }
@@ -63,7 +62,6 @@ namespace Match3.GameCore
                 {
                     _availableTime = value;
                     _ui.SetAvailableTime(value);
-
                 }
             }
         }
@@ -97,7 +95,6 @@ namespace Match3.GameCore
 
         void IGameBoardConnector.FinishedBlockMovementEvent()
         {
-            
             if (AvailableMoves == 0 || IsAllGoalsReached() || _availableTime < 1)
             {
                 FinishLevel();
@@ -107,7 +104,8 @@ namespace Match3.GameCore
         void IGameBoardConnector.BlockMatchesEvent(List<List<(int row, int column, uint id)>> matchesInTheRow,
                                                    List<List<(int row, int column, uint id)>> matchesInTheColumn)
         {
-            _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
+            var score = _scoreController.CalculateScoreForTheMatches(matchesInTheRow, matchesInTheColumn);
+            _ui.SetScore(score);
             for (var index = 0; index < matchesInTheRow.Count; index++)
             {
                 var e = matchesInTheRow[index];
@@ -119,7 +117,6 @@ namespace Match3.GameCore
                 var e = matchesInTheColumn[index];
                 UpdateGoal(e[0].id, (uint) e.Count);
             }
-
         }
 
         public void Stop()
@@ -162,7 +159,7 @@ namespace Match3.GameCore
                 _timerCoroutine = null;
             }
 
-            _levelPlayResultConnector.FinishedLevelEvent((uint)UnityEngine.Random.Range(100, 1000));
+            _levelPlayResultConnector.FinishedLevelEvent(_scoreController.TotalScore);
         }
 
         IEnumerator StartTimer(uint delay) //check resume
@@ -180,7 +177,7 @@ namespace Match3.GameCore
 
         void UpdateGoal(uint blockId, uint count)
         {
-            var cur = _goals.TryGetValue(blockId, out var current);
+            _goals.TryGetValue(blockId, out var current);
             if (current > 0)
             {
                 _goals[blockId] -= Math.Min(current, count);
@@ -196,7 +193,7 @@ namespace Match3.GameCore
         void InitializeUI()
         {
             _ui.ResetState();
-
+            _ui.SetScore(0);
             foreach (var goal in _levelConfig.Goals)
             {
                 switch (goal)
