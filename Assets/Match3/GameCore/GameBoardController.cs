@@ -237,7 +237,7 @@ namespace Match3.GameCore
                     _compacting.Compact(_board.ConvertToIntMatrix(), out var shifts, out var outBoard1);
                     AnimateCompacting(shifts);
 
-                    var tryCount = 10;
+                    var tryCount = 30;
                     var hasPossibleMatches = false;
                     List<(int row, int column, uint id)> newBlocks;
                     do
